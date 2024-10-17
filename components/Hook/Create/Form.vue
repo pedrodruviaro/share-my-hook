@@ -57,7 +57,7 @@ const parsedDescription = computed(() => {
 
           <div
             v-show="isPreviewOpen"
-            class="prose prose-sm prose-invert w-full max-w-[100%] prose-pre:max-w-[85vw] md:prose-pre:max-w-none"
+            class="border border-slate-800 rounded-lg p-2 prose prose-sm prose-invert w-full max-w-[100%] prose-pre:max-w-[85vw] md:prose-pre:max-w-none"
             v-html="parsedDescription"
           ></div>
         </div>
