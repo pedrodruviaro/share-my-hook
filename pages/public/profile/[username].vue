@@ -16,6 +16,7 @@ const handleOpenGithubProfile = () => {
           avatarUrl="https://avatars.githubusercontent.com/u/82953655?s=400&u=35eed86dbbe67454cea86a22913f0a59731f2b7a&v=4"
           username="pedroruviaro"
           jobtitle="Front end developer @ wire"
+          website="https://pedroruviaro.com.br"
           bio="Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, ad!"
           @wants-see-github-profile="handleOpenGithubProfile"
         />

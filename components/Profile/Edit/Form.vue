@@ -19,6 +19,13 @@ const emits = defineEmits<{
       </UFormGroup>
     </div>
 
+    <UFormGroup label="Webiste">
+      <UInput
+        placeholder="http://www.johndoe.io"
+        icon="i-heroicons-globe-alt"
+      />
+    </UFormGroup>
+
     <UFormGroup label="Fale um pouco sobre você">
       <UTextarea :rows="6" />
     </UFormGroup>

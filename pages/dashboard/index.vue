@@ -2,6 +2,7 @@
 
 <template>
   <div>
-    <h1>Dashabord index</h1>
+    <!-- DashboardProfile -->
+    <!-- HookList -> HookListLoader -> HookCard -->
   </div>
 </template>
