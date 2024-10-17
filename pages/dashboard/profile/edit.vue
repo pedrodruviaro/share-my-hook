@@ -3,6 +3,10 @@ const handleSaveProfile = () => {
   console.log("* Salvar perfil")
 }
 
+definePageMeta({
+  layout: "admin",
+})
+
 useSeoMeta({
   title: "Editar perfil",
 })

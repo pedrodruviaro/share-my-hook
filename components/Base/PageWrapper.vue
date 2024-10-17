@@ -6,7 +6,7 @@
       <slot name="header" />
     </div>
 
-    <div class="my-10 md:py-16">
+    <div class="my-10 md:my-16">
       <slot />
     </div>
   </div>
