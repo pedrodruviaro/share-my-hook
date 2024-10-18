@@ -2,16 +2,26 @@
 definePageMeta({
   layout: "admin",
 })
+
+const router = useRouter()
+const handleNavigateToHookDetail = (id: string) => {
+  router.push(`/public/hook/${id}`)
+}
+
+const handleNavigateToHookEdit = (id: string) => {
+  router.push(`/dashboard/hook/edit/${id}`)
+}
 </script>
 
 <template>
-  <div class="grid gap-10 md:gap-4 md:grid-cols-[1fr_2fr]">
+  <div class="grid gap-10 md:gap-4 md:grid-cols-[1fr_2fr] md:items-start">
     <DashboardProfile
       avatarUrl="https://avatars.githubusercontent.com/u/82953655?s=400&u=35eed86dbbe67454cea86a22913f0a59731f2b7a&v=4"
       name="Pedro Ruviaro"
       username="pedroruviaro"
       jobtitle="Front end developer @ wire"
       website="https://pedroruviaro.com.br"
+      class="md:sticky md:top-8"
     />
 
     <div>
@@ -33,7 +43,16 @@ definePageMeta({
 
       <HookListLoader :loading="false">
         <HookList>
-          <USkeleton class="w-full h-20" v-for="i in 4" :key="i" />
+          <HookCard
+            v-for="i in 4"
+            :key="i"
+            id="123"
+            title="useUser.ts"
+            code="const user = new User()"
+            lang="typescript"
+            @detail="handleNavigateToHookDetail"
+            @wants-edit="handleNavigateToHookEdit"
+          />
         </HookList>
       </HookListLoader>
     </div>
