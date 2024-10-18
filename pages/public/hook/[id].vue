@@ -159,28 +159,24 @@ export function useCurrentUser() {
   };
 }
 `
+
+definePageMeta({
+  layout: "public",
+})
 </script>
 
 <template>
-  <BasePageWrapper>
-    <template #header>
-      <LandingPageHeader />
-    </template>
+  <div class="grid gap-10 w-full">
+    <HookPublicHeadline
+      createBy="pedrodruviaro"
+      title="useCurrentUser.ts"
+      lang="typescript"
+      :description="DOC"
+      @wants-see-creator="navigateToCreatorProfile"
+    />
 
-    <template>
-      <UContainer class="grid gap-10 w-full">
-        <HookPublicHeadline
-          createBy="pedrodruviaro"
-          title="useCurrentUser.ts"
-          lang="typescript"
-          :description="DOC"
-          @wants-see-creator="navigateToCreatorProfile"
-        />
-
-        <ClientOnly>
-          <HookPublicCode lang="typescript" :code="CODE" />
-        </ClientOnly>
-      </UContainer>
-    </template>
-  </BasePageWrapper>
+    <ClientOnly>
+      <HookPublicCode lang="typescript" :code="CODE" />
+    </ClientOnly>
+  </div>
 </template>
