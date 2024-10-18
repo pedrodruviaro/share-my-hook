@@ -16,9 +16,8 @@ useSeoMeta({
     <UContainer>
       <div class="w-full max-w-[400px] flex justify-center mx-auto">
         <UCard>
-          <h1 class="font-semibold text-xl text-center">
-            Entre com sua conta do GitHub
-          </h1>
+          <BaseTitle label="Entre com sua conta do GitHub" size="md" />
+
           <div class="my-6">
             <UDivider icon="i-simple-icons-github" />
           </div>

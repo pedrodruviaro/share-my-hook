@@ -14,8 +14,7 @@ useSeoMeta({
 
 <template>
   <div class="grid gap-8">
-    <h1 class="font-bold text-xl md:text-2xl">Edite sua informações</h1>
-
+    <BaseTitle label="Edite sua informações" />
     <ProfileEditForm @save-profile="handleSaveProfile" />
   </div>
 </template>

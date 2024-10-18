@@ -13,4 +13,7 @@ export default defineNuxtConfig({
     classSuffix: "-mode",
     storageKey: "sharemyhook-color-mode",
   },
+  tailwindcss: {
+    exposeConfig: true,
+  },
 })

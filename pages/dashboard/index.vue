@@ -5,7 +5,6 @@ definePageMeta({
 </script>
 
 <template>
-  <!-- #TODO REMOVE CONTAINER -->
   <div class="grid gap-10 md:gap-4 md:grid-cols-[1fr_2fr]">
     <DashboardProfile
       avatarUrl="https://avatars.githubusercontent.com/u/82953655?s=400&u=35eed86dbbe67454cea86a22913f0a59731f2b7a&v=4"
@@ -34,7 +33,6 @@ definePageMeta({
 
       <HookListLoader :loading="false">
         <HookList>
-          <!-- <HookCard v-for="i in 4" :key="i" /> -->
           <USkeleton class="w-full h-20" v-for="i in 4" :key="i" />
         </HookList>
       </HookListLoader>
