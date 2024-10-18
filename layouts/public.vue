@@ -3,14 +3,11 @@
 <template>
   <BasePageWrapper>
     <template #header>
-      <!-- @todo -> conditional header -->
       <LandingPageHeader />
     </template>
 
-    <template>
-      <UContainer>
-        <slot />
-      </UContainer>
-    </template>
+    <UContainer>
+      <slot />
+    </UContainer>
   </BasePageWrapper>
 </template>
