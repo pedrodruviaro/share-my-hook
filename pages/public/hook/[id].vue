@@ -175,8 +175,6 @@ definePageMeta({
       @wants-see-creator="navigateToCreatorProfile"
     />
 
-    <ClientOnly>
-      <HookPublicCode lang="typescript" :code="CODE" />
-    </ClientOnly>
+    <HookSyntaxHighlight :code="CODE" lang="typescript" />
   </div>
 </template>
