@@ -5,8 +5,16 @@ const handleNavigation = (path: string) => {
   router.push(path)
 }
 
-const handleLogout = () => {
-  console.log("* Abrir confirm dialog")
+const { loading: loadingLogout, logout } = useAuthActions()
+const isConfirmLogoutOpen = ref(false)
+
+const handleLogout = async () => {
+  try {
+    await logout()
+    router.push("/")
+  } catch (error) {
+    console.log("error -> ", error)
+  }
 }
 </script>
 
@@ -19,8 +27,30 @@ const handleLogout = () => {
         @navigate-to-dashboard="handleNavigation('/dashboard')"
         @navigate-to-create-hook="handleNavigation('/dashboard/hook/create')"
         @navigate-to-edit-profile="handleNavigation('/dashboard/profile/edit')"
-        @logout="handleLogout"
+        @logout="isConfirmLogoutOpen = true"
       />
+
+      <UModal v-model="isConfirmLogoutOpen">
+        <UCard>
+          <template #header>
+            <BaseTitle size="sm" label="Deseja realmente sair?" />
+          </template>
+
+          <div class="flex flex-wrap gap-2">
+            <UButton
+              label="Voltar"
+              variant="ghost"
+              @click="isConfirmLogoutOpen = false"
+              :disabled="loadingLogout"
+            />
+            <UButton
+              label="Confirmar"
+              @click="handleLogout"
+              :loading="loadingLogout"
+            />
+          </div>
+        </UCard>
+      </UModal>
     </template>
 
     <UContainer>

@@ -1,27 +1,5 @@
 <script setup lang="ts">
-const loading = ref(false)
-
-const supabase = useSupabaseClient()
-const config = useRuntimeConfig()
-
-const handleLoginWithGitHub = async () => {
-  try {
-    loading.value = true
-
-    const response = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: `${config.public.siteUrl}/auth/redirect`,
-      },
-    })
-
-    console.log(response)
-  } catch (error) {
-    console.log("error =>", error)
-  } finally {
-    loading.value = false
-  }
-}
+const { loading, login } = useAuthActions()
 
 useSeoMeta({
   title: "Login",
@@ -44,8 +22,8 @@ useSeoMeta({
               color="white"
               variant="solid"
               size="lg"
-              :loading
-              @click="handleLoginWithGitHub"
+              :loading="loading"
+              @click="login"
             />
           </div>
         </UCard>
