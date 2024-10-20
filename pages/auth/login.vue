@@ -1,9 +1,26 @@
 <script setup lang="ts">
 const loading = ref(false)
 
-const handleLoginWithGitHub = () => {
-  loading.value = true
-  console.log("* Wants to login!")
+const supabase = useSupabaseClient()
+const config = useRuntimeConfig()
+
+const handleLoginWithGitHub = async () => {
+  try {
+    loading.value = true
+
+    const response = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${config.public.siteUrl}/auth/redirect`,
+      },
+    })
+
+    console.log(response)
+  } catch (error) {
+    console.log("error =>", error)
+  } finally {
+    loading.value = false
+  }
 }
 
 useSeoMeta({

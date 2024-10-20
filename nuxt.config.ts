@@ -2,9 +2,21 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxtjs/supabase"],
   imports: {
     dirs: ["./composables/auth"],
+  },
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.SITE_URL,
+    },
+  },
+  supabase: {
+    redirectOptions: {
+      login: "/auth/login",
+      callback: "/auth/redirect",
+      exclude: ["/public/*"],
+    },
   },
   colorMode: {
     preference: "dark",

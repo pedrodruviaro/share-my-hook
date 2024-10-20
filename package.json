@@ -12,6 +12,7 @@
   "dependencies": {
     "@guolao/vue-monaco-editor": "^1.5.4",
     "@nuxt/ui": "^2.18.7",
+    "@nuxtjs/supabase": "^1.4.1",
     "@wooorm/starry-night": "^3.5.0",
     "hast-util-to-html": "^9.0.3",
     "marked": "^14.1.3",
