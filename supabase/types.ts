@@ -38,27 +38,30 @@ export type Database = {
         Row: {
           code: string
           created_at: string
-          description: string
+          documentation: string
           id: string
-          lang: string
+          is_public: boolean
+          language: string
           profile_id: string | null
           title: string
         }
         Insert: {
           code: string
           created_at?: string
-          description: string
+          documentation: string
           id: string
-          lang: string
+          is_public: boolean
+          language: string
           profile_id?: string | null
           title: string
         }
         Update: {
           code?: string
           created_at?: string
-          description?: string
+          documentation?: string
           id?: string
-          lang?: string
+          is_public?: boolean
+          language?: string
           profile_id?: string | null
           title?: string
         }
