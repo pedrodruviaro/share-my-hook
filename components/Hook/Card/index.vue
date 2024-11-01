@@ -13,7 +13,9 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <article class="space-y-4 p-4 border rounded-lg border-slate-700">
+  <article
+    class="space-y-4 p-4 border rounded-lg border-slate-200 dark:border-slate-700"
+  >
     <UBadge :label="props.lang" color="gray" variant="subtle" />
     <BaseTitle :label="props.title" />
 

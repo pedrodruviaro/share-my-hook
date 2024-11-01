@@ -1,4 +1,14 @@
 <script setup lang="ts">
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === "dark"
+  },
+  set() {
+    colorMode.preference = colorMode.value === "dark" ? "light" : "dark"
+  },
+})
+
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
   formatOnType: true,
@@ -72,7 +82,7 @@ const parsedDescription = computed(() => {
       <ClientOnly>
         <VueMonacoEditor
           id="editor"
-          theme="vs-dark"
+          :theme="isDark ? 'vs-dark' : 'vs'"
           default-language="typescript"
           class="min-h-[400px]"
           language="typescript"

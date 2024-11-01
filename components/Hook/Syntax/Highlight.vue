@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { common, createStarryNight } from "@wooorm/starry-night"
 import { toHtml } from "hast-util-to-html"
-import "@wooorm/starry-night/style/dark"
+import "@wooorm/starry-night/style/both"
 
 const props = withDefaults(
   defineProps<{
@@ -40,7 +40,7 @@ watch(
 <template>
   <HookSyntaxLoader :loading="loading">
     <pre
-      class="text-xs rounded bg-slate-800 p-2 overflow-x-auto overflow-y-auto"
+      class="text-xs rounded bg-slate-50 dark:bg-slate-800 p-2 overflow-x-auto overflow-y-auto"
       :class="{ 'max-h-[300px]': props.limitedHeight }"
       v-html="htmlCode"
     ></pre>

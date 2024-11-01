@@ -6,7 +6,7 @@ const props = defineProps<{
 
 <template>
   <div
-    class="prose prose-sm prose-invert w-full max-w-[100%] prose-pre:max-w-[85vw] md:prose-pre:max-w-none"
+    class="prose prose-sm dark:prose-invert w-full max-w-[100%] prose-pre:max-w-[85vw] md:prose-pre:max-w-none"
     v-html="props.html"
   ></div>
 </template>
