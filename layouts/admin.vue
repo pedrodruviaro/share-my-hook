@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const router = useRouter()
+const user = useSupabaseUser()
 
 const handleNavigation = (path: string) => {
   router.push(path)
@@ -7,7 +8,6 @@ const handleNavigation = (path: string) => {
 
 const { loading: loadingLogout, logout } = useAuthActions()
 const isConfirmLogoutOpen = ref(false)
-
 const handleLogout = async () => {
   try {
     await logout()
@@ -19,11 +19,11 @@ const handleLogout = async () => {
 </script>
 
 <template>
-  <BasePageWrapper>
+  <BaseLayoutWrapper>
     <template #header>
       <DashboardHeader
-        avatarUrl="https://avatars.githubusercontent.com/u/82953655?s=400&u=35eed86dbbe67454cea86a22913f0a59731f2b7a&v=4"
-        username="pedroruviaro"
+        :avatarUrl="user?.user_metadata.avatar_url"
+        :username="user?.user_metadata.user_name"
         @navigate-to-dashboard="handleNavigation('/dashboard')"
         @navigate-to-create-hook="handleNavigation('/dashboard/hook/create')"
         @navigate-to-edit-profile="handleNavigation('/dashboard/profile/edit')"
@@ -56,5 +56,5 @@ const handleLogout = async () => {
     <UContainer>
       <slot />
     </UContainer>
-  </BasePageWrapper>
+  </BaseLayoutWrapper>
 </template>

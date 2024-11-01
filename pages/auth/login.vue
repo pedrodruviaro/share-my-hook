@@ -7,7 +7,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <BasePageWrapper>
+  <BaseLayoutWrapper>
     <UContainer>
       <div class="w-full max-w-[400px] flex justify-center mx-auto">
         <UCard>
@@ -29,5 +29,5 @@ useSeoMeta({
         </UCard>
       </div>
     </UContainer>
-  </BasePageWrapper>
+  </BaseLayoutWrapper>
 </template>

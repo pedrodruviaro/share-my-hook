@@ -5,7 +5,7 @@ definePageMeta({
 
 const router = useRouter()
 const handleNavigateToHookDetail = (id: string) => {
-  router.push(`/public/hook/${id}`)
+  router.push(`/hook/${id}`)
 }
 
 const handleNavigateToHookEdit = (id: string) => {

@@ -38,13 +38,11 @@ watch(
 </script>
 
 <template>
-  <div class="w-full">
-    <HookSyntaxLoader :loading="loading">
-      <pre
-        class="text-xs rounded bg-slate-800 p-2 overflow-x-auto overflow-y-auto"
-        :class="{ 'max-h-[300px]': props.limitedHeight }"
-        v-html="htmlCode"
-      ></pre>
-    </HookSyntaxLoader>
-  </div>
+  <HookSyntaxLoader :loading="loading">
+    <pre
+      class="text-xs rounded bg-slate-800 p-2 overflow-x-auto overflow-y-auto"
+      :class="{ 'max-h-[300px]': props.limitedHeight }"
+      v-html="htmlCode"
+    ></pre>
+  </HookSyntaxLoader>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <BasePageWrapper>
+  <BaseLayoutWrapper>
     <template #header>
       <LandingPageHeader />
     </template>
@@ -9,5 +9,5 @@
     <UContainer>
       <slot />
     </UContainer>
-  </BasePageWrapper>
+  </BaseLayoutWrapper>
 </template>

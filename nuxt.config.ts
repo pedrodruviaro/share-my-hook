@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "@nuxtjs/supabase"],
   imports: {
-    dirs: ["./composables/auth"],
+    dirs: ["./composables/auth", "./composables/user"],
   },
   runtimeConfig: {
     public: {
