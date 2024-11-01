@@ -29,10 +29,7 @@ const parsedDescription = useMarkdown(props.description)
       </p>
 
       <BaseWidget title="Documentação">
-        <div
-          class="prose prose-sm prose-invert w-full max-w-[100%] prose-pre:max-w-[85vw] md:prose-pre:max-w-none"
-          v-html="parsedDescription"
-        ></div>
+        <HookProse :html="parsedDescription" />
       </BaseWidget>
     </div>
   </section>

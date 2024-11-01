@@ -55,12 +55,13 @@ const parsedDescription = computed(() => {
             v-model="description"
           />
 
-          <div
+          <HookProse
+            :html="parsedDescription"
             v-show="isPreviewOpen"
-            class="border border-slate-800 rounded-lg p-2 prose prose-sm prose-invert w-full max-w-[100%] prose-pre:max-w-[85vw] md:prose-pre:max-w-none"
-            v-html="parsedDescription"
-          ></div>
+            class="border border-slate-800 rounded-lg p-2"
+          />
         </div>
+
         <UBadge color="gray" variant="solid" size="xs"
           >Markdown é suportado</UBadge
         >
@@ -72,10 +73,10 @@ const parsedDescription = computed(() => {
         <VueMonacoEditor
           id="editor"
           theme="vs-dark"
-          :options="MONACO_EDITOR_OPTIONS"
           default-language="typescript"
           class="min-h-[400px]"
           language="typescript"
+          :options="MONACO_EDITOR_OPTIONS"
         />
       </ClientOnly>
     </div>

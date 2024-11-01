@@ -11,10 +11,10 @@ useSeoMeta({
 </script>
 
 <template>
-  <BasePageWrapper>
+  <BaseLayoutWrapper>
     <template #header>
       <LandingPageHeader @wants-login-with-github="handleNavigateToLogin" />
     </template>
     <LandingPageHero @wants-login-with-github="handleNavigateToLogin" />
-  </BasePageWrapper>
+  </BaseLayoutWrapper>
 </template>
