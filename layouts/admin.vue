@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const router = useRouter()
-const user = useSupabaseUser()
 
 const handleNavigation = (path: string) => {
   router.push(path)
@@ -16,14 +15,18 @@ const handleLogout = async () => {
     console.log("error -> ", error)
   }
 }
+
+const userStore = useUserStore()
+await userStore.loadUser()
 </script>
 
 <template>
   <BaseLayoutWrapper>
     <template #header>
       <DashboardHeader
-        :avatarUrl="user?.user_metadata.avatar_url"
-        :username="user?.user_metadata.user_name"
+        v-if="userStore.user"
+        :avatarUrl="userStore.user?.avatarUrl"
+        :username="userStore.user?.username"
         @navigate-to-dashboard="handleNavigation('/dashboard')"
         @navigate-to-create-hook="handleNavigation('/dashboard/hook/create')"
         @navigate-to-edit-profile="handleNavigation('/dashboard/profile/edit')"

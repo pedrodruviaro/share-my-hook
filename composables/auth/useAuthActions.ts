@@ -1,5 +1,6 @@
 export function useAuthActions() {
   const services = useServices()
+  const userStore = useUserStore()
 
   const loading = ref(false)
 
@@ -18,6 +19,7 @@ export function useAuthActions() {
     try {
       loading.value = true
       await services.auth.logout()
+      userStore.resetUser()
     } catch (error) {
       console.log("error -> ", error)
     } finally {

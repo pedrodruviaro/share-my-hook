@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const DEFAULT_TIMEOUT = 1_500
+const DEFAULT_TIMEOUT = 500
 const router = useRouter()
 
 onMounted(() => {

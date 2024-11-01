@@ -12,16 +12,19 @@ const handleNavigateToHookDetail = (id: string) => {
 const handleNavigateToHookEdit = (id: string) => {
   router.push(`/dashboard/hook/edit/${id}`)
 }
+
+const userStore = useUserStore()
 </script>
 
 <template>
   <div class="grid gap-10 md:gap-4 md:grid-cols-[1fr_2fr] md:items-start">
     <DashboardProfile
-      avatarUrl="https://avatars.githubusercontent.com/u/82953655?s=400&u=35eed86dbbe67454cea86a22913f0a59731f2b7a&v=4"
-      name="Pedro Ruviaro"
-      username="pedroruviaro"
-      jobtitle="Front end developer @ wire"
-      website="https://pedroruviaro.com.br"
+      v-if="userStore.user"
+      :avatarUrl="userStore.user?.avatarUrl"
+      :name="userStore.user.name"
+      :username="userStore.user?.username"
+      :jobtitle="userStore.user?.jobtitle"
+      :website="userStore.user?.site"
       class="md:sticky md:top-8"
     />
 

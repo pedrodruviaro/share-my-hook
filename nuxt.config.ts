@@ -2,9 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/supabase"],
+  modules: ["@nuxt/ui", "@nuxtjs/supabase", "@pinia/nuxt"],
   imports: {
-    dirs: ["./composables/auth", "./composables/user"],
+    dirs: ["./composables/auth", "./composables/profiles"],
   },
   runtimeConfig: {
     public: {
