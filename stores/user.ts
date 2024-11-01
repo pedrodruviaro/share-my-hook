@@ -32,5 +32,5 @@ export const useUserStore = defineStore("user", () => {
     user.value.jobtitle = infos?.jobtitle
   }
 
-  return { user, loading, loadUser, resetUser, updateUserInfos }
+  return { user, loading, isUserLoaded, loadUser, resetUser, updateUserInfos }
 })

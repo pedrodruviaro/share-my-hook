@@ -4,6 +4,18 @@ const { loading, login } = useAuthActions()
 useSeoMeta({
   title: "Login",
 })
+
+const router = useRouter()
+const userStore = useUserStore()
+const user = useSupabaseUser()
+const isLogged = computed(() => {
+  return userStore.isUserLoaded || user.value?.id !== ""
+})
+
+onMounted(() => {
+  if (!isLogged.value) return
+  router.push("/dashboard")
+})
 </script>
 
 <template>
@@ -23,6 +35,7 @@ useSeoMeta({
               variant="solid"
               size="lg"
               :loading="loading"
+              :disabled="isLogged"
               @click="login"
             />
           </div>
