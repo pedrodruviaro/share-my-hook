@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <BasePageWrapper>
+  <BaseLayoutWrapper>
     <template #header>
       <USkeleton class="w-full py-8" />
     </template>
@@ -16,5 +16,5 @@
         </div>
       </div>
     </UContainer>
-  </BasePageWrapper>
+  </BaseLayoutWrapper>
 </template>
