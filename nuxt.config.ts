@@ -20,9 +20,6 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: "dark",
-    fallback: "dark",
-    classPrefix: "",
-    classSuffix: "-mode",
     storageKey: "sharemyhook-color-mode",
   },
   tailwindcss: {
