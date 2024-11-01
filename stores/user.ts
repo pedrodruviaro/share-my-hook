@@ -1,3 +1,5 @@
+import type { UserInfos } from "~/entities/User/Infos"
+
 export const useUserStore = defineStore("user", () => {
   const supabaseUser = useSupabaseUser()
 
@@ -21,5 +23,14 @@ export const useUserStore = defineStore("user", () => {
     isUserLoaded.value = false
   }
 
-  return { user, loading, loadUser, resetUser }
+  const updateUserInfos = (infos: UserInfos) => {
+    if (!user.value) return
+
+    user.value.name = infos.name
+    user.value.site = infos.site
+    user.value.bio = infos.bio
+    user.value.jobtitle = infos?.jobtitle
+  }
+
+  return { user, loading, loadUser, resetUser, updateUserInfos }
 })

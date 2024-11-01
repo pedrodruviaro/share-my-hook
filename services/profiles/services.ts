@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 import type { Database } from "~/supabase/types"
 import { getMyselfAdapter } from "./adapters"
+import type { EditOptions } from "./types"
 
 export default (client: SupabaseClient<Database>) => ({
   async getMyself(userId: string) {
@@ -10,5 +11,13 @@ export default (client: SupabaseClient<Database>) => ({
       .eq("id", userId)
       .single()
     return getMyselfAdapter(response.data)
+  },
+
+  async edit(userId: string, { name, bio, site, jobtitle }: EditOptions) {
+    await client
+      .from("profiles")
+      .update({ name, bio, site, jobtitle })
+      .eq("id", userId)
+    return { userId }
   },
 })
