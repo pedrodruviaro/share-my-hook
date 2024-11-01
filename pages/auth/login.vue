@@ -6,11 +6,8 @@ useSeoMeta({
 })
 
 const router = useRouter()
-const userStore = useUserStore()
-const user = useSupabaseUser()
-const isLogged = computed(() => {
-  return userStore.isUserLoaded || user.value?.id !== ""
-})
+const session = useSupabaseSession()
+const isLogged = computed(() => !!session.value)
 
 onMounted(() => {
   if (!isLogged.value) return
