@@ -9,6 +9,7 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: "detail", id: string): void
   (e: "wants-edit", id: string): void
+  (e: "share", id: string): void
 }>()
 </script>
 
@@ -16,12 +17,23 @@ const emits = defineEmits<{
   <article
     class="space-y-4 p-4 border rounded-lg border-slate-200 dark:border-slate-700"
   >
-    <UBadge :label="props.lang" color="gray" variant="subtle" />
+    <div class="flex gap-2 justify-between">
+      <UBadge :label="props.lang" color="gray" variant="subtle" />
+      <UButton
+        label="Compartilhar"
+        variant="ghost"
+        icon="i-heroicons-share"
+        trailing
+        size="sm"
+        @click="emits('share', props.id)"
+      />
+    </div>
+
     <BaseTitle :label="props.title" />
 
     <HookSyntaxHighlight
-      code="const animal = new Animal()"
-      lang="typescript"
+      :code="props.code"
+      :lang="props.lang"
       :limited-height="true"
     />
 

@@ -57,7 +57,7 @@ const items = [
 </script>
 
 <template>
-  <header class="py-4 border-b border-b-slate-700">
+  <header class="py-4 border-b border-b-zinc-200 dark:border-b-zinc-700">
     <UContainer>
       <div class="flex flex-wrap gap-2 justify-between items-center">
         <NuxtLink to="/dashboard">

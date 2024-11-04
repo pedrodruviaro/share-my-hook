@@ -13,7 +13,20 @@ const handleNavigateToHookEdit = (id: string) => {
   router.push(`/dashboard/hook/edit/${id}`)
 }
 
+const handleShare = (id: string) => {
+  console.log("* Share -> ", id)
+}
+
 const userStore = useUserStore()
+
+const {
+  loading: loadingHooks,
+  hooks,
+  hooksCount,
+  getHooks,
+} = useHookList({ userId: userStore.user?.id })
+
+onMounted(() => getHooks())
 </script>
 
 <template>
@@ -39,23 +52,24 @@ const userStore = useUserStore()
             :ui="{ rounded: 'rounded-full' }"
             color="white"
             variant="solid"
-            >7</UBadge
+            >{{ hooksCount }}</UBadge
           >
         </p>
         <UDivider class="-mt-[1.5px]" />
       </div>
 
-      <HookListLoader :loading="false">
+      <HookListLoader :loading="loadingHooks">
         <HookList>
           <HookCard
-            v-for="i in 4"
-            :key="i"
-            id="123"
-            title="useUser.ts"
-            code="const user = new User()"
-            lang="typescript"
+            v-for="hook in hooks"
+            :key="hook.id"
+            :id="hook.id"
+            :title="hook.title"
+            :code="hook.code"
+            :lang="hook.language"
             @detail="handleNavigateToHookDetail"
             @wants-edit="handleNavigateToHookEdit"
+            @share="handleShare"
           />
         </HookList>
       </HookListLoader>
