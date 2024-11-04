@@ -4,7 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "@nuxtjs/supabase", "@pinia/nuxt"],
   imports: {
-    dirs: ["./composables/auth", "./composables/profiles"],
+    dirs: [
+      "./composables/auth",
+      "./composables/profiles",
+      "./composables/hooks",
+    ],
   },
   runtimeConfig: {
     public: {
