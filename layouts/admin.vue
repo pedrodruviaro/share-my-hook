@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const router = useRouter()
 
-const handleNavigation = (path: string) => {
+const handleNavigation = (path: string, payload?: string) => {
   router.push(path)
 }
 
@@ -30,6 +30,9 @@ await userStore.loadUser()
         @navigate-to-dashboard="handleNavigation('/dashboard')"
         @navigate-to-create-hook="handleNavigation('/dashboard/hook/create')"
         @navigate-to-edit-profile="handleNavigation('/dashboard/profile/edit')"
+        @navigate-to-public-profile="
+          handleNavigation(`/users/${userStore.user.username}`)
+        "
         @logout="isConfirmLogoutOpen = true"
       />
 

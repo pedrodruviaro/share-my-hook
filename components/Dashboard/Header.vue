@@ -18,6 +18,7 @@ const emits = defineEmits<{
   (e: "navigate-to-dashboard"): void
   (e: "navigate-to-create-hook"): void
   (e: "navigate-to-edit-profile"): void
+  (e: "navigate-to-public-profile"): void
   (e: "logout"): void
 }>()
 
@@ -44,6 +45,11 @@ const items = [
       label: "Editar perfil",
       icon: "i-heroicons-pencil",
       click: () => emits("navigate-to-edit-profile"),
+    },
+    {
+      label: "Ver perfil público",
+      icon: "i-heroicons-user",
+      click: () => emits("navigate-to-public-profile"),
     },
   ],
   [
