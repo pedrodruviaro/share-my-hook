@@ -1,28 +1,12 @@
 <script setup lang="ts">
+import { monacoEditorOptions } from "~/constants/monacoEditorOptions"
 import type { ZodFormattedError } from "zod"
 import type { Hook, Languages } from "~/entities/Hook/Hook"
-
-const colorMode = useColorMode()
-const isDark = computed(() => colorMode.value === "dark")
-
-const MONACO_EDITOR_OPTIONS = {
-  automaticLayout: true,
-  formatOnType: true,
-  formatOnPaste: true,
-  padding: {
-    top: 10,
-    bottom: 10,
-    left: 10,
-    right: 10,
-  },
-  fontSize: 15,
-}
 
 type LanguagesSelect = {
   name: string
   value: Languages
 }
-
 const languages: LanguagesSelect[] = [
   {
     name: "TypeScript",
@@ -33,6 +17,9 @@ const languages: LanguagesSelect[] = [
     value: "javascript",
   },
 ]
+
+const colorMode = useColorMode()
+const isDark = computed(() => colorMode.value === "dark")
 
 const props = defineProps<{
   loading: boolean
@@ -51,6 +38,14 @@ const data = defineModel<{
   isPublic: boolean
 }>({ required: true })
 
+watchEffect(() => {
+  const isTypescript = data.value.title.endsWith(".ts")
+  const isJavascript = data.value.title.endsWith(".js")
+
+  if (isTypescript) data.value.language = "typescript"
+  if (isJavascript) data.value.language = "javascript"
+})
+
 const isPreviewOpen = ref(false)
 const previewOptions = computed(() => {
   return {
@@ -59,20 +54,38 @@ const previewOptions = computed(() => {
   }
 })
 const togglePreview = () => (isPreviewOpen.value = !isPreviewOpen.value)
-
 const parsedDescription = computed(() => {
   return useMarkdown(data.value.documentation)
 })
+
+const isPublic = computed(() => data.value.isPublic)
+const isPublicButtonLabel = computed(() => {
+  return isPublic.value ? "Criar hook público" : "Criar hook privado"
+})
+const publicButtonItems = [
+  [
+    {
+      label: "Criar hook público",
+      icon: "i-heroicons-eye",
+      click: () => (data.value.isPublic = true),
+    },
+    {
+      label: "Criar hook privado",
+      icon: "i-heroicons-eye-slash",
+      click: () => (data.value.isPublic = false),
+    },
+  ],
+]
 </script>
 
 <template>
   <div class="space-y-8">
     <div class="grid items-start gap-2 md:grid-cols-[2fr_1fr]">
       <div>
-        <UFormGroup label="Título" required>
+        <UFormGroup label="Título (incluindo extensão)" required>
           <UInput
             class="w-full flex-2"
-            placeholder="Título do hook"
+            placeholder="useUser.ts"
             v-model="data.title"
             id="title"
           />
@@ -106,8 +119,6 @@ const parsedDescription = computed(() => {
           >
         </UFormGroup>
       </div>
-
-      <UCheckbox v-model="data.isPublic" name="isPublic" label="Hook público" />
     </div>
 
     <div>
@@ -118,7 +129,7 @@ const parsedDescription = computed(() => {
           class="min-h-[400px] border dark:border-zinc-700"
           language="typescript"
           :theme="isDark ? 'vs-dark' : 'vs'"
-          :options="MONACO_EDITOR_OPTIONS"
+          :options="monacoEditorOptions"
           v-model:value="data.code"
         />
       </ClientOnly>
@@ -176,13 +187,37 @@ const parsedDescription = computed(() => {
       </div>
     </UCard>
 
-    <UButton
-      variant="outline"
-      label="Criar hook"
-      icon="i-heroicons-check"
-      trailing
-      @click="emits('create')"
-      :loading="props.loading"
-    />
+    <div class="flex justify-end">
+      <UButton
+        class="button-create"
+        :label="isPublicButtonLabel"
+        :loading="props.loading"
+        @click="emits('create')"
+      />
+      <UDropdown
+        :items="publicButtonItems"
+        :popper="{ placement: 'bottom-start' }"
+      >
+        <UButton
+          trailing-icon="i-heroicons-chevron-down-20-solid"
+          class="button-create-select"
+          :disabled="props.loading"
+        />
+      </UDropdown>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.button-create {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  @apply border-r border-zinc-200 dark:border-zinc-700;
+}
+
+.button-create-select {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+</style>
