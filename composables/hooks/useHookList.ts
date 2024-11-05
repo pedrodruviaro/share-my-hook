@@ -8,7 +8,7 @@ interface UseHookListOptions {
 export function useHookList({ userId, isPublic }: UseHookListOptions) {
   const services = useServices()
 
-  const loading = ref(false)
+  const loading = ref(true)
   const hooks = ref<Hook[]>([])
   const hooksCount = ref(0)
 

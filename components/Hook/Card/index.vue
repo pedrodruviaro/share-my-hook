@@ -4,6 +4,7 @@ const props = defineProps<{
   title: string
   code: string
   lang: string
+  isOwner: boolean
 }>()
 
 const emits = defineEmits<{

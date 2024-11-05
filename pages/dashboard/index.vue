@@ -41,38 +41,21 @@ onMounted(() => getHooks())
       class="md:sticky md:top-8"
     />
 
-    <div>
-      <div class="mb-8">
-        <p
-          class="flex items-center gap-2 max-w-max border-b-[3px] border-sky-400 pr-3 pb-2 relative"
-        >
-          <UIcon name="i-heroicons-chevron-up-down" class="w-5 h-5" />
-          Meus hooks
-          <UBadge
-            :ui="{ rounded: 'rounded-full' }"
-            color="white"
-            variant="solid"
-            >{{ hooksCount }}</UBadge
-          >
-        </p>
-        <UDivider class="-mt-[1.5px]" />
-      </div>
-
-      <HookListLoader :loading="loadingHooks">
-        <HookList>
-          <HookCard
-            v-for="hook in hooks"
-            :key="hook.id"
-            :id="hook.id"
-            :title="hook.title"
-            :code="hook.code"
-            :lang="hook.language"
-            @detail="handleNavigateToHookDetail"
-            @wants-edit="handleNavigateToHookEdit"
-            @share="handleShare"
-          />
-        </HookList>
-      </HookListLoader>
-    </div>
+    <HookListLoader :loading="loadingHooks">
+      <HookList label="Meus hooks" :count="hooksCount">
+        <HookCard
+          v-for="hook in hooks"
+          :key="hook.id"
+          :id="hook.id"
+          :title="hook.title"
+          :code="hook.code"
+          :lang="hook.language"
+          :isOwner="true"
+          @detail="handleNavigateToHookDetail"
+          @wants-edit="handleNavigateToHookEdit"
+          @share="handleShare"
+        />
+      </HookList>
+    </HookListLoader>
   </div>
 </template>
