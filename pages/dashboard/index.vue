@@ -9,10 +9,6 @@ const handleNavigateToHookEdit = (id: string) => {
   router.push(`/dashboard/hook/edit/${id}`)
 }
 
-const handleShare = (id: string) => {
-  console.log("* Share -> ", id)
-}
-
 const userStore = useUserStore()
 
 const {
