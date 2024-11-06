@@ -50,13 +50,11 @@ useSeoMeta({
       :code="hook.code"
       :lang="hook.language"
       :isOwner="false"
-      @detail="() => console.log('detail')"
-      @wants-edit="() => console.log('edit')"
-      @share="() => console.log('share')"
     />
   </HookList>
 
   <UBadge
+    v-else
     size="lg"
     color="black"
     variant="subtle"

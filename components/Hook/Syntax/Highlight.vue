@@ -40,7 +40,7 @@ watch(
 <template>
   <HookSyntaxLoader :loading="loading">
     <pre
-      class="text-xs rounded bg-slate-50 dark:bg-slate-800 p-2 overflow-x-auto overflow-y-auto"
+      class="text-xs bg-slate-50 dark:bg-slate-800 p-2 px-4 overflow-x-auto overflow-y-auto rounded-lg"
       :class="{ 'max-h-[300px]': props.limitedHeight }"
       v-html="htmlCode"
     ></pre>

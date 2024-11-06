@@ -8,10 +8,17 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (e: "detail", id: string): void
   (e: "wants-edit", id: string): void
-  (e: "share", id: string): void
 }>()
+
+const router = useRouter()
+const handleNavigateToDetail = () => {
+  router.push(`/hook/${props.id}`)
+}
+
+const handleShare = () => {
+  console.log("* - Share hook ", props.id)
+}
 </script>
 
 <template>
@@ -28,7 +35,7 @@ const emits = defineEmits<{
         icon="i-heroicons-share"
         trailing
         size="sm"
-        @click="emits('share', props.id)"
+        @click="handleShare"
       />
     </div>
 
@@ -50,7 +57,7 @@ const emits = defineEmits<{
       <UButton
         label="Ver detalhe"
         variant="soft"
-        @click="emits('detail', props.id)"
+        @click="handleNavigateToDetail"
       />
     </div>
   </article>

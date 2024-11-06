@@ -12,6 +12,7 @@ import {
   readAllAdapater,
   readAllPublicProfileAdapter,
   readOneByUserAdapter,
+  readOnePublicAdapter,
 } from "./adapters"
 
 export default (client: SupabaseClient<Database>) => ({
@@ -87,5 +88,17 @@ export default (client: SupabaseClient<Database>) => ({
       .order("created_at", { ascending: false })
 
     return readAllPublicProfileAdapter(response.data)
+  },
+
+  async readOnePublic(id: string) {
+    const response = await client
+      .from("hooks")
+      .select(
+        "id, title, code, documentation, language, created_at, profiles!inner( username )"
+      )
+      .match({ id: id, is_public: true })
+      .single()
+
+    return readOnePublicAdapter(response.data)
   },
 })

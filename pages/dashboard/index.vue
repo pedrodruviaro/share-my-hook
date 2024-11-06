@@ -5,10 +5,6 @@ definePageMeta({
 
 const router = useRouter()
 
-const handleNavigateToHookDetail = (id: string) => {
-  router.push(`/hook/${id}`)
-}
-
 const handleNavigateToHookEdit = (id: string) => {
   router.push(`/dashboard/hook/edit/${id}`)
 }
@@ -59,9 +55,7 @@ onMounted(() => getHooks())
           :code="hook.code"
           :lang="hook.language"
           :isOwner="true"
-          @detail="handleNavigateToHookDetail"
           @wants-edit="handleNavigateToHookEdit"
-          @share="handleShare"
         />
       </HookList>
     </HookListLoader>

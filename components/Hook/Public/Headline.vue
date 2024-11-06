@@ -2,15 +2,17 @@
 const props = defineProps<{
   title: string
   lang: string
-  description: string
   createBy: string
+  createdAt: Date
 }>()
 
 const emits = defineEmits<{
   (e: "wants-see-creator"): void
 }>()
 
-const parsedDescription = useMarkdown(props.description)
+const localizedDate = computed(() => {
+  return props.createdAt.toLocaleDateString("pt-BR")
+})
 </script>
 
 <template>
@@ -18,19 +20,21 @@ const parsedDescription = useMarkdown(props.description)
     <div class="space-y-3">
       <UBadge color="gray" variant="solid" size="md">{{ props.lang }}</UBadge>
       <h1 class="font-bold text-2xl md:text-3xl">{{ props.title }}</h1>
-      <p class="pb-10">
-        Criado por:
-        <button
-          @click="emits('wants-see-creator')"
-          class="text-sky-400 font-semibold"
-        >
-          @{{ props.createBy }}
-        </button>
-      </p>
+      <div class="flex flex-wrap items-center gap-2 justify-between">
+        <p>
+          Criado por:
+          <button
+            @click="emits('wants-see-creator')"
+            class="text-sky-400 font-semibold hover:opacity-85"
+          >
+            @{{ props.createBy }}
+          </button>
+        </p>
 
-      <BaseWidget title="Documentação">
-        <HookProse :html="parsedDescription" />
-      </BaseWidget>
+        <UBadge size="xs" color="black" variant="subtle">{{
+          localizedDate
+        }}</UBadge>
+      </div>
     </div>
   </section>
 </template>

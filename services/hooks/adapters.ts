@@ -1,5 +1,5 @@
 import type { Hook, Languages } from "~/entities/Hook/Hook"
-import type { ReadAllPublicProfile, ReadAllRow } from "./types"
+import type { ReadAllPublicProfile, ReadAllRow, ReadOnePublic } from "./types"
 import type { User } from "~/entities/User/User"
 
 export function readAllAdapater(data: ReadAllRow[] | null): Hook[] | null {
@@ -70,5 +70,27 @@ export function readAllPublicProfileAdapter(
   return {
     hooks,
     profile,
+  }
+}
+
+type ReadOnePublicAdapter = Omit<Hook, "profileId" | "isPublic"> & {
+  profiles: Pick<User, "username">
+}
+
+export function readOnePublicAdapter(
+  data: ReadOnePublic | null
+): ReadOnePublicAdapter | null {
+  if (!data) return null
+
+  return {
+    id: data.id,
+    title: data.title,
+    code: data.code,
+    documentation: data.documentation,
+    language: data.language as Languages,
+    createdAt: new Date(data.created_at),
+    profiles: {
+      username: data.profiles.username,
+    },
   }
 }

@@ -27,4 +27,6 @@ export type ReadAllPublicProfile = Omit<
   profiles: Omit<ProfileRow, "id">
 }
 
-// id: string
+export type ReadOnePublic = Omit<ReadAllRow, "profile_id" | "is_public"> & {
+  profiles: Pick<ProfileRow, "username">
+}

@@ -11,9 +11,15 @@ useHead({
 
 <template>
   <NuxtLayout>
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator color="#38BDF8" :height="4" />
     <NuxtPage />
 
     <UNotifications />
   </NuxtLayout>
 </template>
+
+<style>
+body {
+  @apply bg-slate-50 dark:bg-slate-950;
+}
+</style>
