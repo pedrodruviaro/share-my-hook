@@ -41,7 +41,9 @@ useSeoMeta({
     class="mb-10"
   />
 
-  <HookList :label="`Hooks de ${username}`" v-if="data?.hooks">
+  <HookListHeadline :label="`Hooks de ${username}`" />
+
+  <HookList v-if="data?.hooks">
     <HookCard
       v-for="hook in data.hooks"
       :key="hook.id"

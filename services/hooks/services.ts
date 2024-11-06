@@ -4,6 +4,7 @@ import type { Database } from "~/supabase/types"
 import type {
   CreateOptions,
   EditOptions,
+  ReadAllOptions,
   ReadAllPublicProfile,
   ReadAllRow,
   ReadOneByUserOptions,
@@ -47,25 +48,27 @@ export default (client: SupabaseClient<Database>) => ({
     return { id }
   },
 
-  async readAll(userId: string, isPublic?: boolean) {
-    const [hooks, count] = await Promise.all([
-      await client
-        .from("hooks")
-        .select("*")
-        .eq("profile_id", userId)
-        .returns<ReadAllRow[]>()
-        .order("created_at", { ascending: false }),
+  async readAll({ userId, order, status }: ReadAllOptions) {
+    const isAscending = order === "asc"
 
-      await client
-        .from("hooks")
-        .select("id", { count: "exact", head: true })
-        .eq("profile_id", userId),
-    ])
+    let hooksQuery = client
+      .from("hooks")
+      .select("*")
+      .match({ profile_id: userId })
+      .returns<ReadAllRow[]>()
+      .order("created_at", { ascending: isAscending })
 
-    return {
-      data: readAllAdapater(hooks.data),
-      count: count.count,
+    if (status === "public") {
+      // @ts-ignore
+      hooksQuery = hooksQuery.filter("is_public", "is", true)
+    } else if (status === "private") {
+      // @ts-ignore
+      hooksQuery = hooksQuery.filter("is_public", "is", false)
     }
+
+    const response = await hooksQuery
+
+    return readAllAdapater(response.data)
   },
 
   async readOneByUser({ id, userId }: ReadOneByUserOptions) {

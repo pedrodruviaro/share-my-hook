@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { QueryOrder, QueryStatus } from "~/services/hooks/types"
+
 definePageMeta({
   layout: "admin",
 })
@@ -14,35 +16,90 @@ const userStore = useUserStore()
 const {
   loading: loadingHooks,
   hooks,
-  hooksCount,
   getHooks,
 } = useHookList({ userId: userStore.user?.id })
 
-onMounted(() => getHooks())
+onMounted(() => getHooks("desc"))
+
+type StatusOption = {
+  label: string
+  value: QueryStatus
+}
+
+const status: StatusOption[] = [
+  {
+    label: "Todos",
+    value: "all",
+  },
+  {
+    label: "Públicos",
+    value: "public",
+  },
+  {
+    label: "Privados",
+    value: "private",
+  },
+]
+const selectedStatus = ref(status[0].value)
+
+type DateOption = {
+  label: string
+  value: QueryOrder
+}
+
+const dateOrders: DateOption[] = [
+  {
+    label: "Mais novos",
+    value: "desc",
+  },
+  {
+    label: "Mais antigos",
+    value: "asc",
+  },
+]
+const selectedDateOrder = ref(dateOrders[0].value)
+
+const handleGetFilteredHooks = async () => {
+  await getHooks(selectedDateOrder.value, selectedStatus.value)
+}
 </script>
 
 <template>
   <div class="space-y-10">
-    <div class="grid gap-4 md:grid-cols-2">
-      <DashboardProfile
-        v-if="userStore.user"
-        :avatarUrl="userStore.user?.avatarUrl"
-        :name="userStore.user.name"
-        :username="userStore.user?.username"
-        :jobtitle="userStore.user?.jobtitle"
-        :website="userStore.user?.site"
-      />
+    <DashboardHeadline
+      v-if="userStore.user"
+      :avatarUrl="userStore.user?.avatarUrl"
+      :name="userStore.user.name"
+      :username="userStore.user?.username"
+      :jobtitle="userStore.user?.jobtitle"
+      :website="userStore.user?.site"
+    />
 
-      <!-- <UCard>
-        <p>TOTAL HOOKS</p>
-        <p>TOTAL PUBLIC</p>
-        <p>TOTAL PRIVATE</p>
-        <p>MEMBER SINCE</p>
-      </UCard> -->
-    </div>
+    <HookListHeadline label="Meus hooks">
+      <template #actions>
+        <div class="flex gap-2 pb-2">
+          <USelectMenu
+            v-model="selectedStatus"
+            :options="status"
+            value-attribute="value"
+            option-attribute="label"
+            :disabled="loadingHooks"
+            @change="handleGetFilteredHooks"
+          />
+          <USelectMenu
+            v-model="selectedDateOrder"
+            :options="dateOrders"
+            value-attribute="value"
+            option-attribute="label"
+            :disabled="loadingHooks"
+            @change="handleGetFilteredHooks"
+          />
+        </div>
+      </template>
+    </HookListHeadline>
 
     <HookListLoader :loading="loadingHooks">
-      <HookList label="Meus hooks" :count="hooksCount">
+      <HookList label="Meus hooks" v-if="hooks.length > 0">
         <HookCard
           v-for="hook in hooks"
           :key="hook.id"
@@ -55,6 +112,8 @@ onMounted(() => getHooks())
           @wants-edit="handleNavigateToHookEdit"
         />
       </HookList>
+
+      <p v-else>Sem hooks</p>
     </HookListLoader>
   </div>
 </template>

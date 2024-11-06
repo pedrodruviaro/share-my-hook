@@ -1,7 +1,7 @@
 export const PROFILE_EDIT_RULES = {
   name: {
     min: 2,
-    max: 50,
+    max: 40,
   },
   jobtitle: {
     max: 100,

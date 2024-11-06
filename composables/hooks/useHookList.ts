@@ -1,28 +1,33 @@
 import type { Hook } from "~/entities/Hook/Hook"
+import type { QueryOrder, QueryStatus } from "~/services/hooks/types"
 
 interface UseHookListOptions {
   userId: string | undefined
-  isPublic?: boolean
 }
 
-export function useHookList({ userId, isPublic }: UseHookListOptions) {
+export function useHookList({ userId }: UseHookListOptions) {
   const services = useServices()
 
   const loading = ref(true)
   const hooks = ref<Hook[]>([])
-  const hooksCount = ref(0)
 
-  const getHooks = async () => {
+  const getHooks = async (
+    order: QueryOrder = "asc",
+    status: QueryStatus = "all"
+  ) => {
     if (!userId) return
 
     try {
       loading.value = true
 
-      const response = await services.hooks.readAll(userId)
-      if (!response.data || !response.count) return
+      const response = await services.hooks.readAll({
+        userId,
+        order,
+        status,
+      })
+      if (!response) return
 
-      hooks.value = response.data
-      hooksCount.value = response.count
+      hooks.value = response
     } catch (error) {
       console.error(error)
     } finally {
@@ -33,7 +38,6 @@ export function useHookList({ userId, isPublic }: UseHookListOptions) {
   return {
     loading,
     hooks,
-    hooksCount,
     getHooks,
   }
 }

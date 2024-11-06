@@ -3,6 +3,16 @@ const userStore = useUserStore()
 await userStore.loadUser()
 
 const router = useRouter()
+const siteUrl = useRuntimeConfig().public.siteUrl
+
+const handleNavigation = (path: string, external: boolean = false) => {
+  if (external) {
+    if (!window) return
+    window.open(siteUrl + path)
+  }
+
+  router.push(path)
+}
 
 const { loading: loadingLogout, logout } = useAuthActions()
 
@@ -25,11 +35,11 @@ const handleLogout = async () => {
         v-if="userStore.user"
         :avatarUrl="userStore.user?.avatarUrl"
         :username="userStore.user?.username"
-        @navigate-to-dashboard="router.push('/dashboard')"
-        @navigate-to-create-hook="router.push('/dashboard/hook/create')"
-        @navigate-to-edit-profile="router.push('/dashboard/profile/edit')"
+        @navigate-to-dashboard="handleNavigation('/dashboard')"
+        @navigate-to-create-hook="handleNavigation('/dashboard/hook/create')"
+        @navigate-to-edit-profile="handleNavigation('/dashboard/profile/edit')"
         @navigate-to-public-profile="
-          router.push(`/users/${userStore.user.username}`)
+          handleNavigation(`/users/${userStore.user.username}`, true)
         "
         @logout="isConfirmLogoutOpen = true"
       />

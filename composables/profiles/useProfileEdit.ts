@@ -6,16 +6,19 @@ import type { User } from "~/entities/User/User"
 const schema = z.object({
   name: z
     .string()
-    .max(PROFILE_EDIT_RULES.name.max, "O campo tem um máximo de 30 caracteres")
+    .max(
+      PROFILE_EDIT_RULES.name.max,
+      `O campo tem um máximo de ${PROFILE_EDIT_RULES.name.max} caracteres`
+    )
     .min(
       PROFILE_EDIT_RULES.name.min,
-      "Insira um nome com pelo menos 2 caracteres"
+      `Insira um nome com pelo menos ${PROFILE_EDIT_RULES.name.min} caracteres`
     ),
   jobtitle: z
     .string()
     .max(
       PROFILE_EDIT_RULES.jobtitle.max,
-      "O campo tem um máximo de 50 caracteres"
+      `O campo tem um máximo de ${PROFILE_EDIT_RULES.jobtitle.max} caracteres`
     )
     .optional(),
   site: z.union([

@@ -1,5 +1,4 @@
 import type { Hook, Languages } from "~/entities/Hook/Hook"
-import type { User } from "~/entities/User/User"
 import type { Database } from "~/supabase/types"
 import type { ProfileRow } from "../profiles/types"
 
@@ -34,4 +33,13 @@ export type ReadOnePublic = Omit<ReadAllRow, "profile_id" | "is_public"> & {
 export type RemoveOneOptions = {
   id: string
   userId: string
+}
+
+export type QueryOrder = "desc" | "asc"
+export type QueryStatus = "all" | "public" | "private"
+
+export type ReadAllOptions = {
+  userId: string
+  order: QueryOrder
+  status: QueryStatus
 }
