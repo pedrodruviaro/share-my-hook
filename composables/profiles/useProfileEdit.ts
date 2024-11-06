@@ -11,11 +11,10 @@ const schema = z.object({
     .string()
     .max(100, "O campo tem um máximo de 50 caracteres")
     .optional(),
-  site: z
-    .string()
-    .url()
-    .max(100, "O campo tem um máximo de 70 caracteres")
-    .optional(),
+  site: z.union([
+    z.literal(""),
+    z.string().trim().url("Insira uma url válida"),
+  ]),
   bio: z
     .string()
     .max(400, "O campo tem um máximo de 400 caracteres")
