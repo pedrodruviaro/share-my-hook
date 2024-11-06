@@ -37,8 +37,13 @@ const {
         :errors
         :loading="loadingEdit"
         v-model="data"
+        v-if="hook"
         @edit="edit"
       />
+
+      <UBadge color="red" size="lg" v-else>
+        <p>Hook não encontrado. Verifique a url e tente novamente</p>
+      </UBadge>
     </HookEditFormLoader>
   </div>
 </template>

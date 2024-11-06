@@ -23,10 +23,17 @@ export function useHook({ user, hookId }: UseHookOptions) {
         userId: user.id,
       })
 
-      if (!response) return
+      if (!response) {
+        throw createError({
+          fatal: true,
+          statusCode: 404,
+          statusMessage: "Hook não encontrado",
+        })
+      }
 
       hook.value = response
     } catch (error) {
+      console.log(error)
     } finally {
       loading.value = false
     }
@@ -37,5 +44,6 @@ export function useHook({ user, hookId }: UseHookOptions) {
   return {
     loading,
     hook,
+    getById,
   }
 }
