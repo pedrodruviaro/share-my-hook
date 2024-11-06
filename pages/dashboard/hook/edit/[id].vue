@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import LazyHookEditRemoveModal from "@/components/Hook/Edit/Remove/Modal.vue"
+
 definePageMeta({
   layout: "admin",
 })
@@ -26,6 +28,13 @@ const {
   user: userStore.user,
   hook,
 })
+
+const isRemoveModalOpen = ref(false)
+
+const { loading: loadingRemove, remove } = useHookRemove({
+  user: userStore.user,
+  hook,
+})
 </script>
 
 <template>
@@ -45,5 +54,18 @@ const {
         <p>Hook não encontrado. Verifique a url e tente novamente</p>
       </UBadge>
     </HookEditFormLoader>
+
+    <div class="pt-28">
+      <HookEditRemoveLoader :loading="loadingHook">
+        <HookEditRemove @remove="isRemoveModalOpen = true" />
+      </HookEditRemoveLoader>
+    </div>
+
+    <LazyHookEditRemoveModal
+      v-model="isRemoveModalOpen"
+      :hookTitle="data.title"
+      :loading="loadingRemove"
+      @confirm="remove"
+    />
   </div>
 </template>

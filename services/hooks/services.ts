@@ -7,6 +7,7 @@ import type {
   ReadAllPublicProfile,
   ReadAllRow,
   ReadOneByUserOptions,
+  RemoveOneOptions,
 } from "./types"
 import {
   readAllAdapater,
@@ -100,5 +101,11 @@ export default (client: SupabaseClient<Database>) => ({
       .single()
 
     return readOnePublicAdapter(response.data)
+  },
+
+  async removeOne({ id, userId }: RemoveOneOptions) {
+    await client.from("hooks").delete().match({ id: id, profile_id: userId })
+
+    return { id }
   },
 })

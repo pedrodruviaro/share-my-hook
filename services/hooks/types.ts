@@ -30,3 +30,8 @@ export type ReadAllPublicProfile = Omit<
 export type ReadOnePublic = Omit<ReadAllRow, "profile_id" | "is_public"> & {
   profiles: Pick<ProfileRow, "username">
 }
+
+export type RemoveOneOptions = {
+  id: string
+  userId: string
+}
