@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: "/auth/login",
       callback: "/auth/redirect",
-      exclude: ["/", "/public/*"],
+      exclude: ["/", "/hook/*", "/users/*"],
     },
   },
   colorMode: {
