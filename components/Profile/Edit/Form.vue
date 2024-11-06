@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { PROFILE_EDIT_RULES } from "~/constants/profileEditRules"
 import type { ZodFormattedError } from "zod"
 import type { UserInfos } from "~/entities/User/Infos"
 
@@ -13,6 +14,13 @@ const emits = defineEmits<{
 
 const infos = defineModel<UserInfos>({
   required: true,
+})
+
+const hasPassedBioLength = computed(() => {
+  if (infos.value.bio) {
+    return infos.value.bio?.length > PROFILE_EDIT_RULES.bio.max
+  }
+  return false
 })
 </script>
 
@@ -54,6 +62,13 @@ const infos = defineModel<UserInfos>({
     </UFormGroup>
 
     <UFormGroup label="Fale um pouco sobre você">
+      <UBadge
+        size="xs"
+        :color="hasPassedBioLength ? 'red' : 'white'"
+        variant="outline"
+        class="mb-2 max-w-max"
+        >{{ infos.bio?.length }} / {{ PROFILE_EDIT_RULES.bio.max }}</UBadge
+      >
       <UTextarea :rows="6" v-model="infos.bio" />
       <UBadge color="red" variant="soft" v-if="props.errors?.bio">{{
         props.errors?.bio?._errors[0]

@@ -1,15 +1,22 @@
 import { z, type ZodFormattedError } from "zod"
+import { PROFILE_EDIT_RULES } from "~/constants/profileEditRules"
 import type { UserInfos } from "~/entities/User/Infos"
 import type { User } from "~/entities/User/User"
 
 const schema = z.object({
   name: z
     .string()
-    .max(50, "O campo tem um máximo de 30 caracteres")
-    .min(2, "Insira um nome com pelo menos 2 caracteres"),
+    .max(PROFILE_EDIT_RULES.name.max, "O campo tem um máximo de 30 caracteres")
+    .min(
+      PROFILE_EDIT_RULES.name.min,
+      "Insira um nome com pelo menos 2 caracteres"
+    ),
   jobtitle: z
     .string()
-    .max(100, "O campo tem um máximo de 50 caracteres")
+    .max(
+      PROFILE_EDIT_RULES.jobtitle.max,
+      "O campo tem um máximo de 50 caracteres"
+    )
     .optional(),
   site: z.union([
     z.literal(""),
@@ -17,7 +24,7 @@ const schema = z.object({
   ]),
   bio: z
     .string()
-    .max(400, "O campo tem um máximo de 400 caracteres")
+    .max(PROFILE_EDIT_RULES.bio.max, "O campo tem um máximo de 400 caracteres")
     .optional(),
 })
 
