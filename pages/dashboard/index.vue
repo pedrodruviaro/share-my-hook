@@ -51,6 +51,7 @@ onMounted(() => getHooks())
           :code="hook.code"
           :lang="hook.language"
           :isOwner="true"
+          :isPublic="hook.isPublic"
           @wants-edit="handleNavigateToHookEdit"
         />
       </HookList>

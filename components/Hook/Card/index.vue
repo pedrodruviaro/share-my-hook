@@ -5,6 +5,7 @@ const props = defineProps<{
   code: string
   lang: string
   isOwner: boolean
+  isPublic: boolean
 }>()
 
 const emits = defineEmits<{
@@ -30,6 +31,7 @@ const handleShare = () => {
         <UBadge :label="props.lang" size="xs" color="gray" />
       </div>
       <UButton
+        v-if="props.isPublic"
         label="Compartilhar"
         variant="ghost"
         icon="i-heroicons-share"
@@ -55,6 +57,7 @@ const handleShare = () => {
         @click="emits('wants-edit', props.id)"
       />
       <UButton
+        v-if="props.isPublic"
         label="Ver detalhe"
         variant="soft"
         @click="handleNavigateToDetail"

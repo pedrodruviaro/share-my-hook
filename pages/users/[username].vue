@@ -50,6 +50,7 @@ useSeoMeta({
       :code="hook.code"
       :lang="hook.language"
       :isOwner="false"
+      :isPublic="true"
     />
   </HookList>
 
