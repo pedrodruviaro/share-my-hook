@@ -76,6 +76,7 @@ export function useProfileEdit({ user }: UseProfileEditOptions) {
       })
 
       userStore.updateUserInfos({ ...infos.value })
+      errors.value = undefined
     } catch (error) {
       toast.add({
         title: "Falha ao atualizar perfil",
