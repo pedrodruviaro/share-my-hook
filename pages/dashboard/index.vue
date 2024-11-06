@@ -30,16 +30,24 @@ onMounted(() => getHooks())
 </script>
 
 <template>
-  <div class="grid gap-10 md:gap-4 md:grid-cols-[1fr_2fr] md:items-start">
-    <DashboardProfile
-      v-if="userStore.user"
-      :avatarUrl="userStore.user?.avatarUrl"
-      :name="userStore.user.name"
-      :username="userStore.user?.username"
-      :jobtitle="userStore.user?.jobtitle"
-      :website="userStore.user?.site"
-      class="md:sticky md:top-8"
-    />
+  <div class="space-y-10">
+    <div class="grid gap-4 md:grid-cols-2">
+      <DashboardProfile
+        v-if="userStore.user"
+        :avatarUrl="userStore.user?.avatarUrl"
+        :name="userStore.user.name"
+        :username="userStore.user?.username"
+        :jobtitle="userStore.user?.jobtitle"
+        :website="userStore.user?.site"
+      />
+
+      <!-- <UCard>
+        <p>TOTAL HOOKS</p>
+        <p>TOTAL PUBLIC</p>
+        <p>TOTAL PRIVATE</p>
+        <p>MEMBER SINCE</p>
+      </UCard> -->
+    </div>
 
     <HookListLoader :loading="loadingHooks">
       <HookList label="Meus hooks" :count="hooksCount">

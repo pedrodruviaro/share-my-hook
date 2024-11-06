@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { common, createStarryNight } from "@wooorm/starry-night"
 import { toHtml } from "hast-util-to-html"
-import "@wooorm/starry-night/style/both"
+import "@/assets/styles/syntax.css"
 
 const props = withDefaults(
   defineProps<{

@@ -23,7 +23,7 @@ const props = defineProps<{
       </p>
       <UDivider class="-mt-[1.5px]" />
     </div>
-    <div class="grid gap-4">
+    <div class="space-y-4">
       <slot />
     </div>
   </div>
