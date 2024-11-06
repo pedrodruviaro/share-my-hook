@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import LazyHookEditRemoveModal from "@/components/Hook/Edit/Remove/Modal.vue"
-
 definePageMeta({
   layout: "admin",
 })

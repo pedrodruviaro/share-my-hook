@@ -13,7 +13,7 @@ useSeoMeta({
 <template>
   <BaseLayoutWrapper>
     <template #header>
-      <LandingPageHeader @wants-login-with-github="handleNavigateToLogin" />
+      <PublicHeader @wants-login-with-github="handleNavigateToLogin" />
     </template>
     <LandingPageHero @wants-login-with-github="handleNavigateToLogin" />
   </BaseLayoutWrapper>

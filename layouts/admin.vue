@@ -1,23 +1,21 @@
 <script setup lang="ts">
+const userStore = useUserStore()
+await userStore.loadUser()
+
 const router = useRouter()
 
-const handleNavigation = (path: string, payload?: string) => {
-  router.push(path)
-}
-
 const { loading: loadingLogout, logout } = useAuthActions()
+
 const isConfirmLogoutOpen = ref(false)
+
 const handleLogout = async () => {
   try {
     await logout()
     router.push("/")
   } catch (error) {
-    console.log("error -> ", error)
+    console.error(error)
   }
 }
-
-const userStore = useUserStore()
-await userStore.loadUser()
 </script>
 
 <template>
@@ -27,36 +25,20 @@ await userStore.loadUser()
         v-if="userStore.user"
         :avatarUrl="userStore.user?.avatarUrl"
         :username="userStore.user?.username"
-        @navigate-to-dashboard="handleNavigation('/dashboard')"
-        @navigate-to-create-hook="handleNavigation('/dashboard/hook/create')"
-        @navigate-to-edit-profile="handleNavigation('/dashboard/profile/edit')"
+        @navigate-to-dashboard="router.push('/dashboard')"
+        @navigate-to-create-hook="router.push('/dashboard/hook/create')"
+        @navigate-to-edit-profile="router.push('/dashboard/profile/edit')"
         @navigate-to-public-profile="
-          handleNavigation(`/users/${userStore.user.username}`)
+          router.push(`/users/${userStore.user.username}`)
         "
         @logout="isConfirmLogoutOpen = true"
       />
 
-      <UModal v-model="isConfirmLogoutOpen">
-        <UCard>
-          <template #header>
-            <BaseTitle size="sm" label="Deseja realmente sair?" />
-          </template>
-
-          <div class="flex flex-wrap gap-2">
-            <UButton
-              label="Voltar"
-              variant="ghost"
-              @click="isConfirmLogoutOpen = false"
-              :disabled="loadingLogout"
-            />
-            <UButton
-              label="Confirmar"
-              @click="handleLogout"
-              :loading="loadingLogout"
-            />
-          </div>
-        </UCard>
-      </UModal>
+      <LazyAuthModalLogout
+        v-model="isConfirmLogoutOpen"
+        :loading="loadingLogout"
+        @confirm="handleLogout"
+      />
     </template>
 
     <UContainer>

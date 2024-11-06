@@ -2,10 +2,14 @@ import type { UserInfos } from "~/entities/User/Infos"
 
 export const useUserStore = defineStore("user", () => {
   const supabaseUser = useSupabaseUser()
+  const session = useSupabaseSession()
 
   const { getUser, user, loading } = useMyself(supabaseUser.value?.id)
 
   const isUserLoaded = ref(false)
+  const isLogged = computed(() => {
+    return Boolean(supabaseUser.value && session.value)
+  })
 
   const loadUser = async () => {
     try {
@@ -32,5 +36,13 @@ export const useUserStore = defineStore("user", () => {
     user.value.jobtitle = infos?.jobtitle
   }
 
-  return { user, loading, isUserLoaded, loadUser, resetUser, updateUserInfos }
+  return {
+    user,
+    loading,
+    isUserLoaded,
+    isLogged,
+    loadUser,
+    resetUser,
+    updateUserInfos,
+  }
 })
