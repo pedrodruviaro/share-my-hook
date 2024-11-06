@@ -1,3 +1,0 @@
-[functions]
-  external_node_modules = ["vscode-oniguruma"]
-  included_files = ["node_modules/vscode-oniguruma/release/onig.wasm"]
