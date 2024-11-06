@@ -1,4 +1,4 @@
-import type { Languages } from "~/entities/Hook/Hook"
+import type { Hook, Languages } from "~/entities/Hook/Hook"
 import type { Database } from "~/supabase/types"
 
 export type CreateOptions = {
@@ -9,4 +9,11 @@ export type CreateOptions = {
   isPublic: boolean
 }
 
+export type EditOptions = Partial<Hook>
+
 export type ReadAllRow = Database["public"]["Tables"]["hooks"]["Row"]
+
+export type ReadOneByUserOptions = {
+  id: string
+  userId: string
+}

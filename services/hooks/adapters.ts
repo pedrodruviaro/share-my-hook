@@ -19,3 +19,18 @@ export function readAllAdapater(data: ReadAllRow[] | null): Hook[] | null {
 
   return mapper
 }
+
+export function readOneByUserAdapter(data: ReadAllRow | null): Hook | null {
+  if (!data) return null
+
+  return {
+    id: data.id,
+    code: data.code,
+    documentation: data.documentation,
+    title: data.title,
+    language: data.language as Languages,
+    createdAt: new Date(data.created_at),
+    isPublic: data.is_public,
+    profileId: data.profile_id || "",
+  }
+}

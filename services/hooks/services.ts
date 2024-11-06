@@ -1,8 +1,13 @@
 import { v4 as uuidv4 } from "uuid"
 import type { SupabaseClient } from "@supabase/supabase-js"
 import type { Database } from "~/supabase/types"
-import type { CreateOptions, ReadAllRow } from "./types"
-import { readAllAdapater } from "./adapters"
+import type {
+  CreateOptions,
+  EditOptions,
+  ReadAllRow,
+  ReadOneByUserOptions,
+} from "./types"
+import { readAllAdapater, readOneByUserAdapter } from "./adapters"
 
 export default (client: SupabaseClient<Database>) => ({
   async create(
@@ -21,6 +26,18 @@ export default (client: SupabaseClient<Database>) => ({
       profile_id: userId,
     })
     return data
+  },
+
+  async edit(
+    userId: string,
+    { id, code, documentation, isPublic, language, title }: EditOptions
+  ) {
+    await client
+      .from("hooks")
+      .update({ code, documentation, is_public: isPublic, language, title })
+      .match({ profile_id: userId, id: id })
+
+    return { id }
   },
 
   async readAll(userId: string, isPublic?: boolean) {
@@ -42,5 +59,15 @@ export default (client: SupabaseClient<Database>) => ({
       data: readAllAdapater(hooks.data),
       count: count.count,
     }
+  },
+
+  async readOneByUser({ id, userId }: ReadOneByUserOptions) {
+    const response = await client
+      .from("hooks")
+      .select("*")
+      .match({ id: id, profile_id: userId })
+      .single()
+
+    return readOneByUserAdapter(response.data)
   },
 })
