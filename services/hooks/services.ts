@@ -4,10 +4,15 @@ import type { Database } from "~/supabase/types"
 import type {
   CreateOptions,
   EditOptions,
+  ReadAllPublicProfile,
   ReadAllRow,
   ReadOneByUserOptions,
 } from "./types"
-import { readAllAdapater, readOneByUserAdapter } from "./adapters"
+import {
+  readAllAdapater,
+  readAllPublicProfileAdapter,
+  readOneByUserAdapter,
+} from "./adapters"
 
 export default (client: SupabaseClient<Database>) => ({
   async create(
@@ -69,5 +74,18 @@ export default (client: SupabaseClient<Database>) => ({
       .single()
 
     return readOneByUserAdapter(response.data)
+  },
+
+  async readAllPublicProfile(username: string) {
+    const response = await client
+      .from("hooks")
+      .select(
+        "id, title, code, documentation, language, created_at, profiles!inner( name, username, avatar_url, email, site, bio, jobtitle )"
+      )
+      .match({ "profiles.username": username, is_public: true })
+      .returns<ReadAllPublicProfile[]>()
+      .order("created_at", { ascending: false })
+
+    return readAllPublicProfileAdapter(response.data)
   },
 })

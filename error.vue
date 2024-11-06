@@ -11,6 +11,7 @@ const handleError = () => clearError({ redirect: "/dashboard" })
 <template>
   <div>
     <h2>{{ props.error?.statusCode }}</h2>
+    <p>{{ props.error?.message }}</p>
     <button @click="handleError">Voltar</button>
   </div>
 </template>

@@ -1,5 +1,7 @@
 import type { Hook, Languages } from "~/entities/Hook/Hook"
+import type { User } from "~/entities/User/User"
 import type { Database } from "~/supabase/types"
+import type { ProfileRow } from "../profiles/types"
 
 export type CreateOptions = {
   title: string
@@ -17,3 +19,12 @@ export type ReadOneByUserOptions = {
   id: string
   userId: string
 }
+
+export type ReadAllPublicProfile = Omit<
+  ReadAllRow,
+  "profile_id" | "is_public"
+> & {
+  profiles: Omit<ProfileRow, "id">
+}
+
+// id: string

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  count: string | number
+  count?: string | number
   label: string
 }>()
 </script>
@@ -14,6 +14,7 @@ const props = defineProps<{
         <UIcon name="i-heroicons-chevron-up-down" class="w-5 h-5" />
         {{ label }}
         <UBadge
+          v-if="props.count"
           :ui="{ rounded: 'rounded-full' }"
           color="white"
           variant="solid"

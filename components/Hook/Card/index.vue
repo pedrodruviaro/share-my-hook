@@ -19,7 +19,9 @@ const emits = defineEmits<{
     class="space-y-4 p-4 border rounded-lg border-slate-200 dark:border-slate-700"
   >
     <div class="flex gap-2 justify-between">
-      <UBadge :label="props.lang" color="gray" variant="subtle" />
+      <div>
+        <UBadge :label="props.lang" size="xs" color="gray" />
+      </div>
       <UButton
         label="Compartilhar"
         variant="ghost"
@@ -40,6 +42,7 @@ const emits = defineEmits<{
 
     <div class="flex gap-2 flex-wrap">
       <UButton
+        v-if="props.isOwner"
         label="Editar"
         variant="ghost"
         @click="emits('wants-edit', props.id)"
