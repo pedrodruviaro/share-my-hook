@@ -29,4 +29,9 @@ export default defineNuxtConfig({
   tailwindcss: {
     exposeConfig: true,
   },
+  vite: {
+    ssr: {
+      external: ["vscode-oniguruma"],
+    },
+  },
 })
