@@ -40,7 +40,9 @@ const navigateToCreatorProfile = () => {
       @wants-see-creator="navigateToCreatorProfile"
     />
 
-    <HookSyntaxHighlight :code="data.code" :lang="data.language" />
+    <ClientOnly>
+      <HookSyntaxHighlight :code="data.code" :lang="data.language" />
+    </ClientOnly>
 
     <HookPublicDocumentation :documentation="data.documentation" />
   </div>

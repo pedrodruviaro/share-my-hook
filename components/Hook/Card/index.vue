@@ -43,11 +43,13 @@ const handleShare = () => {
 
     <BaseTitle :label="props.title" />
 
-    <HookSyntaxHighlight
-      :code="props.code"
-      :lang="props.lang"
-      :limited-height="true"
-    />
+    <ClientOnly>
+      <HookSyntaxHighlight
+        :code="props.code"
+        :lang="props.lang"
+        :limited-height="true"
+      />
+    </ClientOnly>
 
     <div class="flex gap-2 flex-wrap">
       <UButton
