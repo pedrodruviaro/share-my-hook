@@ -27,6 +27,15 @@ useSeoMeta({
     data.value?.profile.name || "usuário"
   }`,
 })
+
+const { share } = useShareLink()
+const handleShare = async () => {
+  await share(
+    `users/${username.value}`,
+    "Perfil do shareMyHook",
+    "Veja esse perfil do criador"
+  )
+}
 </script>
 
 <template>
@@ -39,9 +48,10 @@ useSeoMeta({
     :website="data.profile.site"
     :bio="data.profile.bio"
     class="mb-10"
+    @share-profile="handleShare"
   />
 
-  <HookListHeadline :label="`Hooks de ${username}`" />
+  <HookListHeadline :label="`Hooks de @${username}`" />
 
   <HookList v-if="data?.hooks">
     <HookCard
