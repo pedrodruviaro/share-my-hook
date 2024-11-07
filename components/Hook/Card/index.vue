@@ -18,15 +18,20 @@ const handleNavigateToDetail = () => {
   router.push(`/hook/${props.id}`)
 }
 
-const handleShare = () => {
-  console.log("* - Share hook ", props.id)
-}
-
 const formatedDate = computed(() => {
   if (!props.createdAt) return ""
 
   return new Date(props.createdAt).toLocaleDateString("pt-br")
 })
+
+const { share } = useShareLink()
+const handleShare = async () => {
+  await share(
+    `hook/${props.id}`,
+    "Hook do shareMyHook",
+    `Veja esse hook ${props.title}`
+  )
+}
 </script>
 
 <template>

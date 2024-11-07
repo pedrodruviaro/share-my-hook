@@ -6,6 +6,10 @@ const props = defineProps<{
   jobtitle?: string
   website?: string
 }>()
+
+const emits = defineEmits<{
+  (e: "share-profile"): void
+}>()
 </script>
 
 <template>
@@ -26,7 +30,7 @@ const props = defineProps<{
           trailing
           size="xs"
           color="black"
-          @click="() => console.log('* Share profile')"
+          @click="emits('share-profile')"
         />
       </div>
     </div>

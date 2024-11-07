@@ -9,12 +9,6 @@ definePageMeta({
   layout: "admin",
 })
 
-const router = useRouter()
-
-const handleNavigateToHookEdit = (id: string) => {
-  router.push(`/dashboard/hook/edit/${id}`)
-}
-
 const userStore = useUserStore()
 
 const {
@@ -71,10 +65,26 @@ const dateOrders: DateOption[] = [
     value: "asc",
   },
 ]
+
 const selectedDateOrder = ref(dateOrders[0].value)
 
 const handleGetFilteredHooks = async () => {
   await getHooks(selectedDateOrder.value, selectedStatus.value)
+}
+
+const router = useRouter()
+
+const handleNavigateToHookEdit = (id: string) => {
+  router.push(`/dashboard/hook/edit/${id}`)
+}
+
+const { share } = useShareLink()
+const handleShare = async () => {
+  await share(
+    `users/${userStore.user?.username}`,
+    "Perfil do shareMyHook",
+    "Veja esse perfil do criador"
+  )
 }
 </script>
 
@@ -87,6 +97,7 @@ const handleGetFilteredHooks = async () => {
       :username="userStore.user?.username"
       :jobtitle="userStore.user?.jobtitle"
       :website="userStore.user?.site"
+      @share-profile="handleShare"
     />
 
     <ReportWidgetLoader :loading="loadingReports">
