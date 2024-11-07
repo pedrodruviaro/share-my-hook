@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       "./composables/auth",
       "./composables/profiles",
       "./composables/hooks",
+      "./composables/reports",
     ],
   },
   runtimeConfig: {

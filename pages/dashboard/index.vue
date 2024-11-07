@@ -18,12 +18,22 @@ const handleNavigateToHookEdit = (id: string) => {
 const userStore = useUserStore()
 
 const {
+  loading: loadingReports,
+  reports,
+  getReports,
+} = useMyselfReports({
+  user: userStore.user,
+})
+
+const {
   loading: loadingHooks,
   hooks,
   getHooks,
 } = useHookList({ userId: userStore.user?.id })
 
-onMounted(() => getHooks("desc"))
+onMounted(async () => {
+  await Promise.all([getHooks("desc"), getReports()])
+})
 
 type StatusOption = {
   label: string
@@ -78,6 +88,14 @@ const handleGetFilteredHooks = async () => {
       :jobtitle="userStore.user?.jobtitle"
       :website="userStore.user?.site"
     />
+
+    <ReportWidgetLoader :loading="loadingReports">
+      <ReportWidgetList v-if="reports">
+        <ReportWidgetCard label="Todos" :value="reports.total" />
+        <ReportWidgetCard label="Públicos" :value="reports.public" />
+        <ReportWidgetCard label="Privados" :value="reports.private" />
+      </ReportWidgetList>
+    </ReportWidgetLoader>
 
     <HookListHeadline label="Meus hooks">
       <template #actions>
