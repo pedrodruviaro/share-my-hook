@@ -65,12 +65,12 @@ const isPublicButtonLabel = computed(() => {
 const publicButtonItems = [
   [
     {
-      label: "Editar hook público",
+      label: "Público",
       icon: "i-heroicons-eye",
       click: () => (data.value.isPublic = true),
     },
     {
-      label: "Editar hook privado",
+      label: "Privado",
       icon: "i-heroicons-eye-slash",
       click: () => (data.value.isPublic = false),
     },
