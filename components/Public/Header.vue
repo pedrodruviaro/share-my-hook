@@ -15,9 +15,10 @@ const emits = defineEmits<{
         <div class="flex gap-2 flex-wrap">
           <DarkModeToggler />
           <UButton
-            label="Entrar com Github"
+            label="Entrar"
             icon="i-heroicons-arrow-right-end-on-rectangle"
             trailing
+            variant="ghost"
             @click="emits('wants-login-with-github')"
           />
         </div>

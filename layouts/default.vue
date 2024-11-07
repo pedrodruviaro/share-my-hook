@@ -8,10 +8,9 @@ const router = useRouter()
       <template #header>
         <PublicHeader @wants-login-with-github="router.push('/auth/login')" />
       </template>
-
-      <main>
+      <UContainer>
         <slot />
-      </main>
+      </UContainer>
     </BaseLayoutWrapper>
 
     <LayoutFooter />
