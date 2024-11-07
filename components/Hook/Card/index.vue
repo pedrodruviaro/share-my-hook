@@ -6,6 +6,7 @@ const props = defineProps<{
   lang: string
   isOwner: boolean
   isPublic: boolean
+  createdAt?: Date
 }>()
 
 const emits = defineEmits<{
@@ -20,6 +21,12 @@ const handleNavigateToDetail = () => {
 const handleShare = () => {
   console.log("* - Share hook ", props.id)
 }
+
+const formatedDate = computed(() => {
+  if (!props.createdAt) return ""
+
+  return new Date(props.createdAt).toLocaleDateString("pt-br")
+})
 </script>
 
 <template>
@@ -51,19 +58,25 @@ const handleShare = () => {
       />
     </ClientOnly>
 
-    <div class="flex gap-2 flex-wrap">
-      <UButton
-        v-if="props.isOwner"
-        label="Editar"
-        variant="ghost"
-        @click="emits('wants-edit', props.id)"
-      />
-      <UButton
-        v-if="props.isPublic"
-        label="Ver detalhe"
-        variant="soft"
-        @click="handleNavigateToDetail"
-      />
+    <div class="flex gap-2 items-center flex-wrap justify-between">
+      <div class="flex gap-2 flex-wrap">
+        <UButton
+          v-if="props.isOwner"
+          label="Editar"
+          variant="ghost"
+          @click="emits('wants-edit', props.id)"
+        />
+        <UButton
+          v-if="props.isPublic"
+          label="Ver detalhe"
+          variant="soft"
+          @click="handleNavigateToDetail"
+        />
+      </div>
+
+      <UBadge color="black" variant="soft" v-if="props.createdAt">{{
+        formatedDate
+      }}</UBadge>
     </div>
   </article>
 </template>

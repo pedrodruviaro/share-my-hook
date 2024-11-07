@@ -51,6 +51,7 @@ useSeoMeta({
       :title="hook.title"
       :code="hook.code"
       :lang="hook.language"
+      :createdAt="hook.createdAt"
       :isOwner="false"
       :isPublic="true"
     />

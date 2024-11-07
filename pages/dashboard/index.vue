@@ -111,6 +111,7 @@ const handleGetFilteredHooks = async () => {
           :title="hook.title"
           :code="hook.code"
           :lang="hook.language"
+          :createdAt="hook.createdAt"
           :isOwner="true"
           :isPublic="hook.isPublic"
           @wants-edit="handleNavigateToHookEdit"
