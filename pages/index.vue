@@ -1,20 +1,13 @@
 <script setup lang="ts">
-const router = useRouter()
-
-const handleNavigateToLogin = () => {
-  router.push("/auth/login")
-}
-
 useSeoMeta({
   title: "Compartilhe seus hooks de forma fácil",
 })
+
+const router = useRouter()
 </script>
 
 <template>
-  <BaseLayoutWrapper>
-    <template #header>
-      <PublicHeader @wants-login-with-github="handleNavigateToLogin" />
-    </template>
-    <LandingPageHero @wants-login-with-github="handleNavigateToLogin" />
-  </BaseLayoutWrapper>
+  <div>
+    <LandingPageHero @wants-login-with-github="router.push('/auth/login')" />
+  </div>
 </template>
