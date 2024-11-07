@@ -53,7 +53,10 @@ const handleShare = async () => {
       />
     </div>
 
-    <BaseTitle :label="props.title" />
+    <div class="flex items-center gap-1">
+      <UIcon name="i-heroicons-lock-closed" v-if="!props.isPublic" />
+      <BaseTitle :label="props.title" class="flex-1" />
+    </div>
 
     <ClientOnly>
       <HookSyntaxHighlight
