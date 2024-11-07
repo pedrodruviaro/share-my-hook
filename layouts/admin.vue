@@ -9,6 +9,7 @@ const handleNavigation = (path: string, external: boolean = false) => {
   if (external) {
     if (!window) return
     window.open(siteUrl + path)
+    return
   }
 
   router.push(path)
