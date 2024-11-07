@@ -1,75 +1,34 @@
-# Nuxt 3 Minimal Starter
+# 🪝shareMyHook
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<!-- TODO: Uma plataforma... -->
 
-## Setup
+## Descrição
 
-Make sure to install the dependencies:
+<!-- TODO: O projeto teve como objetivo... -->
 
-```bash
-# npm
-npm install
+<!-- [Entre como convidado e teste agora!](https://sharemyhook.pedroruviaro.com.br/auth/login) -->
 
-# pnpm
-pnpm install
+## Telas da apliacação
 
-# yarn
-yarn install
+<!-- Print das telas -->
 
-# bun
-bun install
-```
+### Dependências
 
-## Development Server
+- Node v20+
 
-Start the development server on `http://localhost:3000`:
+### Instalação
 
-```bash
-# npm
-npm run dev
+- Esse projeto utiliza PNPM
+- Veja o _.env.example_ para configurar as variáveis de ambiente
 
-# pnpm
-pnpm run dev
+  - git clone
+  - pnpm i
+  - pnpm dev
 
-# yarn
-yarn dev
+## Autores
 
-# bun
-bun run dev
-```
+- [Pedro Ruviaro](https://pedroruviaro.com.br/)
 
-## Production
+## Licença
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Esse projeto é licenciado sobre MIT License.
