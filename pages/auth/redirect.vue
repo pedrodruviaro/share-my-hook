@@ -6,6 +6,10 @@ onMounted(() => router.push("/dashboard"))
 useSeoMeta({
   title: "Redirecionando...",
 })
+
+definePageMeta({
+  layout: false,
+})
 </script>
 
 <template>
