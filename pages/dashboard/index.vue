@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { QueryOrder, QueryStatus } from "~/services/hooks/types"
 
+useSeoMeta({
+  title: "Dashboard",
+})
+
 definePageMeta({
   layout: "admin",
 })
