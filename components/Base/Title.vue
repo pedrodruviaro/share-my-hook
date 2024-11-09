@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Sizes = "sm" | "md" | "lg"
+type Sizes = "xs" | "sm" | "md" | "lg"
 
 type SizeClasses = {
   [key in Sizes]: string
@@ -20,6 +20,7 @@ const props = withDefaults(
 )
 
 const sizeClasses: SizeClasses = {
+  xs: "text-base md:text-lg",
   sm: "text-lg md:text-xl",
   md: "text-xl md:text-2xl",
   lg: "text-2xl md:text-3xl",

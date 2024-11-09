@@ -61,7 +61,6 @@ const emits = defineEmits<{
         <img
           class="w-full md:w-[1200px] mx-auto rounded-lg relative rouded-lg leading-none flex items-center border border-t-2 border-t-primary/30 img-border-animation"
           :src="isDark ? '/images/hero-dark.png' : '/images/hero-light.png'"
-          alt="dashboard using shadcn-vue"
         />
 
         <div
