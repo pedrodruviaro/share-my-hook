@@ -1,29 +1,54 @@
 # 🪝shareMyHook
 
-<!-- TODO: Uma plataforma... -->
+A ideia do projeto é servir como uma plataforma de compartilhamento de hooks, seguindo o mesmo conceito do gists, do GitHub. Nesse caso, o foco é a stack TypeScript/JavaScript.
 
 ## Descrição
 
-<!-- TODO: O projeto teve como objetivo... -->
+O principal objetivo foi o aprimoramento de conhecimentos com Nuxt, Supabase e TypeScript.
 
-<!-- [Entre como convidado e teste agora!](https://sharemyhook.pedroruviaro.com.br/auth/login) -->
+## Telas da aplicação
 
-## Telas da apliacação
+### Landing Page
 
-<!-- Print das telas -->
+![landing page](https://utfs.io/f/xJN8nKizMmfT5bY3kEmBD3bKTPJnxW7AMyRhF69E4orcX2pG)
+
+### Dashboard
+
+![dashboard](https://utfs.io/f/xJN8nKizMmfTF5jJCDfkQ0BYbuRGtAv2nKX4xmiZNoSwqyDH)
+
+### Criação/Edição de hook
+
+![Criação / Edição de hook](https://utfs.io/f/xJN8nKizMmfTYWjetzxtnPhsxNjor7UCQTzeGfH6pmIX2cAV)
+
+### Página de perfil público
+
+![Página de perfil público](https://utfs.io/f/xJN8nKizMmfTBMAKkG83R4Or1yx5EAvhVboITscjiSFZXPf6)
+
+### Página de hook público
+
+![Página de hook público](https://utfs.io/f/xJN8nKizMmfTwuKCTTRWxi8vQmA0ZTOdUcLC4PJGaFtXMIjl)
+
+### Página de edição de perfil
+
+![Página de edição de perfil](https://utfs.io/f/xJN8nKizMmfTm24VLXZGoPndD9hj2VYiRxewF5WOpv0XEM7B)
+
+## Roadmap de futuras features
+
+[] Fork de hooks para o próprio perfil
+[] Paginação infitina na dashboard e página de perfil público
 
 ### Dependências
 
+- Yarn 1.22
 - Node v20+
 
 ### Instalação
 
-- Esse projeto utiliza PNPM
-- Veja o _.env.example_ para configurar as variáveis de ambiente
+- git clone
+- pnpm i
+- pnpm dev
 
-  - git clone
-  - pnpm i
-  - pnpm dev
+> Veja o _.env.example_ para configurar as variáveis de ambiente
 
 ## Autores
 
@@ -31,4 +56,4 @@
 
 ## Licença
 
-Esse projeto é licenciado sobre MIT License.
+Esse projeto é licenciado sobre MIT.
