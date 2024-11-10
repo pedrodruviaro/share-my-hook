@@ -2,7 +2,13 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/supabase", "@pinia/nuxt", "@vueuse/nuxt"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/supabase",
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "@nuxtjs/seo",
+  ],
   imports: {
     dirs: [
       "./composables/auth",
@@ -34,5 +40,15 @@ export default defineNuxtConfig({
     ssr: {
       external: ["vscode-oniguruma"],
     },
+  },
+  site: {
+    url: process.env.SITE_URL,
+    name: "ShareMyHook",
+    description:
+      "Descrubra e compartilhe hooks personalizados para acelerar o seu desenvolvimento e de quebra ainda ajude a comunidade",
+    defaultLocale: "pt-BR",
+  },
+  robots: {
+    disallow: ["/dashboard"],
   },
 })
