@@ -5,5 +5,8 @@ export default defineAppConfig({
     icons: {
       dynamic: true,
     },
+    notifications: {
+      position: "top-0 bottom-[unset]",
+    },
   },
 })

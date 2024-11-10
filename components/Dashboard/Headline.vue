@@ -4,7 +4,6 @@ const props = defineProps<{
   name: string
   username: string
   jobtitle?: string
-  website?: string
 }>()
 
 const emits = defineEmits<{
@@ -22,6 +21,7 @@ const emits = defineEmits<{
         <div>
           <h1 class="font-bold text-xl md:text-2xl">{{ props.name }}</h1>
           <p class="md:text-lg text-slate-400">@{{ props.username }}</p>
+          <p v-if="props.jobtitle">{{ props.jobtitle }}</p>
         </div>
 
         <UButton
@@ -33,18 +33,6 @@ const emits = defineEmits<{
           @click="emits('share-profile')"
         />
       </div>
-    </div>
-
-    <div class="grid gap-2 mt-3">
-      <p v-if="props.jobtitle" class="text-lg">{{ props.jobtitle }}</p>
-      <NuxtLink
-        v-if="props.website"
-        :to="props.website"
-        target="_blank"
-        class="text-slate-400 block max-w-max"
-      >
-        {{ props.website }}
-      </NuxtLink>
     </div>
   </section>
 </template>

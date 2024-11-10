@@ -96,7 +96,6 @@ const handleShare = async () => {
       :name="userStore.user.name"
       :username="userStore.user?.username"
       :jobtitle="userStore.user?.jobtitle"
-      :website="userStore.user?.site"
       @share-profile="handleShare"
     />
 
