@@ -8,7 +8,7 @@ export function useShareLink() {
   const share = async (path: string, title?: string, description?: string) => {
     const url = `${window.location.origin}/${path}`
 
-    if (!isSupported.value) {
+    if (isSupported.value) {
       await copy(url)
       toast.add({
         color: "green",
