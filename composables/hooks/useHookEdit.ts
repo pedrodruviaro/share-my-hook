@@ -59,22 +59,8 @@ export function useHookEdit({ user, hook }: UseHookEditOptions) {
 
       if (!response.id) return
 
-      toast.add({
-        title: "Suceso",
-        description: "Hook editado",
-        timeout: 2000,
-        color: "green",
-        callback: () => router.push("/dashboard"),
-      })
-
-      errors.value = undefined
-      data.value.code = ""
-      data.value.documentation = ""
-      data.value.isPublic = true
-      data.value.language = "typescript"
-      data.value.title = ""
+      router.push("/dashboard")
     } catch (error) {
-      console.error(error)
       toast.add({
         title: "Algo falhou",
         description: "Tente editar novamente",
