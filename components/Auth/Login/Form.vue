@@ -15,21 +15,20 @@ const emits = defineEmits<{
     <BaseTitle label="Bem vindo!" center size="md" class="mb-4" />
 
     <div class="my-6">
-      <UDivider />
+      <UDivider icon="i-simple-icons-github" />
     </div>
 
     <BaseTitle
       label="Entre com sua conta do GitHub"
       size="xs"
       center
-      class="mb-2"
+      class="mb-4"
     />
 
     <div class="flex justify-center">
       <UButton
         label="Entrar agora"
         color="white"
-        icon="i-simple-icons-github"
         variant="solid"
         size="lg"
         block
