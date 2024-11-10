@@ -8,7 +8,7 @@ const emits = defineEmits<{
   <header class="py-4">
     <UContainer>
       <div class="flex flex-wrap gap-2 justify-between items-center">
-        <NuxtLink to="/">
+        <NuxtLink to="/dashboard">
           <Logo />
         </NuxtLink>
 
