@@ -25,6 +25,8 @@ const {
   getHooks,
 } = useHookList({ userId: userStore.user?.id })
 
+const hasHooks = computed(() => hooks.value.length > 0)
+
 onMounted(async () => {
   await Promise.all([getHooks("desc"), getReports()])
 })
@@ -112,18 +114,18 @@ const handleShare = async () => {
         <div class="flex gap-2 pb-2">
           <USelectMenu
             v-model="selectedStatus"
-            :options="status"
             value-attribute="value"
             option-attribute="label"
-            :disabled="loadingHooks"
+            :options="status"
+            :disabled="loadingHooks || !hasHooks"
             @change="handleGetFilteredHooks"
           />
           <USelectMenu
             v-model="selectedDateOrder"
-            :options="dateOrders"
             value-attribute="value"
             option-attribute="label"
-            :disabled="loadingHooks"
+            :options="dateOrders"
+            :disabled="loadingHooks || !hasHooks"
             @change="handleGetFilteredHooks"
           />
         </div>
@@ -131,7 +133,7 @@ const handleShare = async () => {
     </HookListHeadline>
 
     <HookListLoader :loading="loadingHooks">
-      <HookList label="Meus hooks" v-if="hooks.length > 0">
+      <HookList label="Meus hooks" v-if="hasHooks">
         <HookCard
           v-for="hook in hooks"
           :key="hook.id"
@@ -146,7 +148,7 @@ const handleShare = async () => {
         />
       </HookList>
 
-      <p v-else>Sem hooks</p>
+      <HookListEmpty class="pt-4" v-else />
     </HookListLoader>
   </div>
 </template>
