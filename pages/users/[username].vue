@@ -16,7 +16,7 @@ const { data, error } = await useAsyncData("hooks-profile", async () => {
 if (error.value) {
   throw createError({
     status: 404,
-    message: "Usuário não encontrado",
+    message: "Usuário não existe ou ainda não compartilhou hooks :(",
     fatal: true,
   })
 }
