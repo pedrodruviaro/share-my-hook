@@ -22,6 +22,9 @@ const {
 const {
   loading: loadingHooks,
   hooks,
+  page,
+  pageSize,
+  totalHooksFromDB,
   getHooks,
 } = useHookList({ userId: userStore.user?.id })
 
@@ -88,6 +91,39 @@ const handleShare = async () => {
     "Veja esse perfil do criador"
   )
 }
+
+// pagination
+const { y } = useWindowScroll()
+const route = useRoute()
+const pageFromRoute = Number(route.query.page || 1)
+page.value = pageFromRoute
+
+watch(
+  () => page.value,
+  async () => {
+    router.replace({
+      path: "/dashboard",
+      query: { page: page.value.toString() },
+    })
+    y.value = 100
+
+    getHooks(selectedDateOrder.value, selectedStatus.value)
+  }
+)
+
+watch(
+  () => selectedDateOrder.value,
+  () => {
+    page.value = 1
+  }
+)
+
+watch(
+  () => selectedStatus.value,
+  () => {
+    page.value = 1
+  }
+)
 </script>
 
 <template>
@@ -109,7 +145,14 @@ const handleShare = async () => {
       </ReportWidgetList>
     </ReportWidgetLoader>
 
-    <HookListHeadline label="Meus hooks">
+    <HookListHeadline
+      label="Meus hooks"
+      :count="totalHooksFromDB"
+      :loading="loadingHooks"
+      :to="(page: number) => ({
+        query: { page }
+      })"
+    >
       <template #actions>
         <div class="flex gap-2 pb-2">
           <USelectMenu
@@ -150,5 +193,12 @@ const handleShare = async () => {
 
       <HookListEmpty class="pt-4" v-else />
     </HookListLoader>
+
+    <UPagination
+      v-if="hooks.length > 0"
+      v-model="page"
+      :page-count="pageSize"
+      :total="totalHooksFromDB"
+    />
   </div>
 </template>
