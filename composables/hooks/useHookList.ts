@@ -10,6 +10,10 @@ export function useHookList({ userId }: UseHookListOptions) {
 
   const loading = ref(true)
   const hooks = ref<Hook[]>([])
+  const totalHooksFromDB = ref(0)
+
+  const page = ref(1)
+  const pageSize = ref(3)
 
   const getHooks = async (
     order: QueryOrder = "asc",
@@ -24,10 +28,13 @@ export function useHookList({ userId }: UseHookListOptions) {
         userId,
         order,
         status,
+        page: page.value,
+        pageSize: pageSize.value,
       })
-      if (!response) return
+      if (!response.hooks) return
 
-      hooks.value = response
+      hooks.value = response.hooks
+      totalHooksFromDB.value = response.count
     } catch (error) {
       console.error(error)
     } finally {
@@ -38,6 +45,9 @@ export function useHookList({ userId }: UseHookListOptions) {
   return {
     loading,
     hooks,
+    page,
+    totalHooksFromDB,
+    pageSize,
     getHooks,
   }
 }

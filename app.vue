@@ -22,4 +22,9 @@ useHead({
 body {
   @apply bg-slate-50 dark:bg-slate-950;
 }
+
+body,
+html {
+  @apply scroll-smooth;
+}
 </style>

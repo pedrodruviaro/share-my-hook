@@ -48,7 +48,13 @@ export default (client: SupabaseClient<Database>) => ({
     return { id }
   },
 
-  async readAll({ userId, order, status }: ReadAllOptions) {
+  async readAll({
+    userId,
+    order,
+    status,
+    page = 1,
+    pageSize = 3,
+  }: ReadAllOptions) {
     const isAscending = order === "asc"
 
     let hooksQuery = client
@@ -58,17 +64,36 @@ export default (client: SupabaseClient<Database>) => ({
       .returns<ReadAllRow[]>()
       .order("created_at", { ascending: isAscending })
 
+    let countQuery = client
+      .from("hooks")
+      .select("id", { count: "exact", head: true })
+      .match({ profile_id: userId })
+      .returns<ReadAllRow[]>()
+      .order("created_at", { ascending: isAscending })
+
     if (status === "public") {
-      // @ts-ignore
+      //@ts-ignore
       hooksQuery = hooksQuery.filter("is_public", "is", true)
+      //@ts-ignore
+      countQuery = countQuery.filter("is_public", "is", true)
     } else if (status === "private") {
-      // @ts-ignore
+      //@ts-ignore
       hooksQuery = hooksQuery.filter("is_public", "is", false)
+      //@ts-ignore
+      countQuery = countQuery.filter("is_public", "is", false)
     }
 
-    const response = await hooksQuery
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
 
-    return readAllAdapater(response.data)
+    hooksQuery = hooksQuery.range(from, to)
+
+    const [hooks, count] = await Promise.all([hooksQuery, countQuery])
+
+    return {
+      hooks: readAllAdapater(hooks.data),
+      count: count.count ?? 0,
+    }
   },
 
   async readOneByUser({ id, userId }: ReadOneByUserOptions) {

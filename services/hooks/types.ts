@@ -42,4 +42,6 @@ export type ReadAllOptions = {
   userId: string
   order: QueryOrder
   status: QueryStatus
+  page?: number
+  pageSize?: number
 }
