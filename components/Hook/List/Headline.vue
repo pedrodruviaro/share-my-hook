@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
   label: string
+  count?: number | string
+  loading?: boolean
 }>()
 </script>
 
@@ -13,6 +15,20 @@ const props = defineProps<{
         >
           <UIcon name="i-heroicons-chevron-up-down" class="w-5 h-5" />
           {{ props.label }}
+
+          <ClientOnly>
+            <UChip
+              v-if="props.count && !loading"
+              :text="props.count"
+              class="ml-2"
+              size="2xl"
+            />
+
+            <USkeleton
+              v-if="props.count && loading"
+              class="w-4 h-4 rounded-full"
+            />
+          </ClientOnly>
         </p>
 
         <slot name="actions" />

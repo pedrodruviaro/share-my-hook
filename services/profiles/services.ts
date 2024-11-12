@@ -1,6 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 import type { Database } from "~/supabase/types"
-import { getMyselfAdapter } from "./adapters"
+import { getMyselfAdapter, getPublicProfileAdapter } from "./adapters"
 import type { EditOptions } from "./types"
 
 export default (client: SupabaseClient<Database>) => ({
@@ -19,5 +19,14 @@ export default (client: SupabaseClient<Database>) => ({
       .update({ name, bio, site, jobtitle })
       .eq("id", userId)
     return { userId }
+  },
+
+  async getPublicProfile(username: string) {
+    const response = await client
+      .from("profiles")
+      .select("*")
+      .match({ username })
+      .single()
+    return getPublicProfileAdapter(response.data)
   },
 })
