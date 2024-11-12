@@ -195,6 +195,7 @@ watch(
     </HookListLoader>
 
     <UPagination
+      v-if="hooks.length > 0"
       v-model="page"
       :page-count="pageSize"
       :total="totalHooksFromDB"

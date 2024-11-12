@@ -3,9 +3,10 @@ import type { QueryOrder, QueryStatus } from "~/services/hooks/types"
 
 interface UseHookListOptions {
   userId: string | undefined
+  perPage?: number
 }
 
-export function useHookList({ userId }: UseHookListOptions) {
+export function useHookList({ userId, perPage }: UseHookListOptions) {
   const services = useServices()
 
   const loading = ref(true)
@@ -13,7 +14,7 @@ export function useHookList({ userId }: UseHookListOptions) {
   const totalHooksFromDB = ref(0)
 
   const page = ref(1)
-  const pageSize = ref(3)
+  const pageSize = ref(perPage ?? 5)
 
   const getHooks = async (
     order: QueryOrder = "asc",
@@ -31,6 +32,7 @@ export function useHookList({ userId }: UseHookListOptions) {
         page: page.value,
         pageSize: pageSize.value,
       })
+
       if (!response.hooks) return
 
       hooks.value = response.hooks
