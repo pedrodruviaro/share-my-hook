@@ -34,8 +34,16 @@ O principal objetivo foi o aprimoramento de conhecimentos com Nuxt, Supabase e T
 
 ## Roadmap de futuras features
 
-[] Fork de hooks para o próprio perfil
-[] Paginação infitina na dashboard e página de perfil público
+### v2
+
+- [] Fork de hooks para o próprio perfil
+- [] Paginação infitina na dashboard e página de perfil público
+- [] Página de criadores (/users)
+- [] Página de hooks criados mais recentes (/hooks)
+
+### v3
+
+- [] Página de busca (/search)
 
 ### Dependências
 
