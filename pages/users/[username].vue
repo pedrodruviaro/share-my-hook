@@ -64,6 +64,13 @@ watch(
     getHooks("desc", "public")
   }
 )
+
+defineOgImageComponent("NuxtSeo", {
+  title: `@${profile.value.username}`,
+  description: "Veja os hooks compartilhados pelo usuário",
+  colorMode: "dark",
+  theme: "#38bdf8",
+})
 </script>
 
 <template>

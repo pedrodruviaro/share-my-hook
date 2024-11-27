@@ -37,6 +37,13 @@ const handleShare = async () => {
     `Veja esse hook ${data.value?.title}`
   )
 }
+
+defineOgImageComponent("NuxtSeo", {
+  title: `@${data.value.title}`,
+  description: "Veja esse hook!",
+  colorMode: "dark",
+  theme: "#38bdf8",
+})
 </script>
 
 <template>

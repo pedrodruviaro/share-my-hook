@@ -4,6 +4,13 @@ useSeoMeta({
 })
 
 const router = useRouter()
+
+defineOgImageComponent("NuxtSeo", {
+  title: "shareMyHook",
+  description: "Compartilhe seus hooks de forma fácil",
+  colorMode: "dark",
+  theme: "#38bdf8",
+})
 </script>
 
 <template>

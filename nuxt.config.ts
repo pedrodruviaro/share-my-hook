@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: process.env.SITE_URL,
-    name: "ShareMyHook",
+    name: "shareMyHook",
     description:
       "Descrubra e compartilhe hooks personalizados para acelerar o seu desenvolvimento e de quebra ainda ajude a comunidade",
     defaultLocale: "pt-BR",
